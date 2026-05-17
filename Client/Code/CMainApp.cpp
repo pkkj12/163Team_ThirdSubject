@@ -1,12 +1,18 @@
 #include "pch.h"
 #include "CMainApp.h"
 
-CMainApp::CMainApp()
+//Test Include
+#include "CPlayer_SM.h"
+#include "CMonster_SM.h"
+//
+
+CMainApp::CMainApp() : m_pPlayer_SM(nullptr)
 {
 }
 
 CMainApp::~CMainApp()
 {
+
 }
 
 HRESULT CMainApp::Ready_MainApp()
@@ -19,6 +25,20 @@ HRESULT CMainApp::Ready_MainApp()
 	m_pGraphicDev = m_pDeviceClass->Get_GraphicDev();
 	m_pGraphicDev->AddRef();
 
+
+	//testCode
+	if (!m_pPlayer_SM)
+	{
+		m_pPlayer_SM = new CPlayer_SM;
+		m_pPlayer_SM->Initialize();
+	}
+
+	m_hDC_SM		= GetDC(g_hWnd);
+	m_hBackDC_SM	= CreateCompatibleDC(m_hDC_SM);
+	m_hBMP_SM		= CreateCompatibleBitmap(m_hDC_SM, WINCX, WINCY);
+	m_hOldBMP_SM	= (HBITMAP)SelectObject(m_hBackDC_SM, m_hBMP_SM);
+
+	//
 	//return E_FAIL;
 
 	return S_OK;
@@ -26,19 +46,27 @@ HRESULT CMainApp::Ready_MainApp()
 
 int CMainApp::Update_MainApp(const _float& fTimeDelta)
 {
+	m_pPlayer_SM->Update();
+
+
+
 	return 0;
 }
 
 void CMainApp::LateUpdate_MainApp(const _float& fTimeDelta)
 {
+	m_pPlayer_SM->Late_Update();
 }
 
 void CMainApp::Render_MainApp()
 {
-	m_pDeviceClass->Render_Begin(D3DXCOLOR(0.f, 0.f, 1.f, 1.f));
+	Rectangle(m_hBackDC_SM, 0, 0, WINCX, WINCY);
 
+	//CSceneMgr_SM::GetInstance()->Render(m_hBackDC_SM);
+	m_pPlayer_SM->Render(m_hBackDC_SM);
 
-	m_pDeviceClass->Render_End();
+	BitBlt(m_hDC_SM, 0, 0, WINCX, WINCY, m_hBackDC_SM, 0, 0, SRCCOPY);
+
 }
 
 CMainApp* CMainApp::Create()

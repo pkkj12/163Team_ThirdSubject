@@ -113,7 +113,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>../Header;../../Base;../../Reference/Header;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Include;../Header;../../Base;../../Reference/Header;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -139,7 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Header\CCollisionMgr_SM.h" />
+    <ClInclude Include="..\Header\CKeyMgr_SM.h" />
     <ClInclude Include="..\Header\CMainApp.h" />
+    <ClInclude Include="..\Header\CMonster_SM.h" />
+    <ClInclude Include="..\Header\CObj_SM.h" />
+    <ClInclude Include="..\Header\CPlayer_SM.h" />
+    <ClInclude Include="..\Header\CScene_SM.h" />
+    <ClInclude Include="..\Header\Define_SM.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
@@ -147,7 +154,13 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\CCollisionMgr_SM.cpp" />
+    <ClCompile Include="..\Code\CKeyMgr_SM.cpp" />
     <ClCompile Include="..\Code\CMainApp.cpp" />
+    <ClCompile Include="..\Code\CMonster_SM.cpp" />
+    <ClCompile Include="..\Code\CObj_SM.cpp" />
+    <ClCompile Include="..\Code\CPlayer_SM.cpp" />
+    <ClCompile Include="..\Code\CScene_SM.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
