@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CObjMgr_JW.h"
+#include "CObstacleMgr_JW.h"
 #include "CObj_JW.h"
 
 IMPLEMENT_SINGLETON(CObjMgr_JW)
@@ -29,11 +30,19 @@ int CObjMgr_JW::Update()
 
 			if (iResult == OBJ_DESTROY_JW)
 			{
-				if (Safe_Release<CObj_JW*>(*iter) == 0);
-					iter = m_pObjListArr[i].erase(iter);
+				//if (Safe_Release<CObj_JW*>(*iter) == 0);
+					
+				Safe_Delete<CObj_JW*>((*iter));
+				iter = m_pObjListArr[i].erase(iter);
 			}
 			else if (iResult == OBJ_HANDOVER_JW)
+			{
+				Safe_Delete<CObj_JW*>((*iter));
 				iter = m_pObjListArr[i].erase(iter);
+
+			//	CObstacleMgr_JW::GetInstance()->PushObstacle((*iter));
+			//	iter = m_pObjListArr[i].erase(iter);
+			}
 
 			if (iter == m_pObjListArr[i].end())
 				break;
@@ -78,7 +87,7 @@ void CObjMgr_JW::DeleteList(ObjType_JW eType)
 
 	for (auto iter = m_pObjListArr[i].begin(); iter != m_pObjListArr[i].end();)
 	{
-		Safe_Release<CObj_JW*>(*iter);
+		Safe_Delete<CObj_JW*>(*iter);
 		iter = m_pObjListArr[i].erase(iter);
 
 		if (iter == m_pObjListArr[i].end())

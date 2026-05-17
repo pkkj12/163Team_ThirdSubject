@@ -75,13 +75,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             dwTime = GetTickCount();
         }
     }
-    _ulong dwRefCnt = 0;
 
-    if (dwRefCnt = Engine::Safe_Release(pMainApp))
-    {
-        MSG_BOX("MainApp Release Failed");
-        return -1;
-    }
+    Safe_Delete(pMainApp);
+
+    //_ulong dwRefCnt = 0;
+
+    //if (dwRefCnt = Engine::Safe_Release(pMainApp))
+    //{
+    //    MSG_BOX("MainApp Release Failed");
+    //    return -1;
+    //}
+
     return (int) msg.wParam;
 }
 

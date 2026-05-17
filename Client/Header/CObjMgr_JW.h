@@ -21,6 +21,10 @@ public:
 
 public:
 	CObj_JW* GetFrontObj(ObjType_JW eType) { return m_pObjListArr[(_ushort)eType].front(); }
+	list<CObj_JW*> GetObjList(ObjType_JW eType) 
+	{
+		return m_pObjListArr[(_ushort)eType];
+	}
 	void PushBackObj(ObjType_JW eType, CObj_JW* pObj);
 	void DeleteList(ObjType_JW eType);
 

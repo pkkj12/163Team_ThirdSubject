@@ -2,7 +2,7 @@
 #include "Define_JW.h"
 #include <queue>
 
-#define STOCK_OBSTACLE_COUNT 1000
+#define STOCK_OBSTACLE_COUNT 50
 
 class CObj_JW;
 
@@ -27,7 +27,7 @@ private:
 
 private:
 	queue<CObj_JW*> m_queueObstacle;
-	_ulong m_dwCurSpawnTime;
-	_ulong m_dwSpawnCoolTime;
+	_ulong			m_dwCurSpawnTime;
+	_ulong			m_dwSpawnCoolTime;
 };
 

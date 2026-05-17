@@ -9,6 +9,7 @@ CMainApp::CMainApp()
 
 CMainApp::~CMainApp()
 {
+	CSceneMgr_::DestroyInstance();
 }
 
 HRESULT CMainApp::Ready_MainApp()

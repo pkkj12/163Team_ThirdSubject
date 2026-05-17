@@ -8,7 +8,7 @@
 IMPLEMENT_SINGLETON(CObstacleMgr_JW)
 
 CObstacleMgr_JW::CObstacleMgr_JW()
-	: m_dwCurSpawnTime(GetTickCount()), m_dwSpawnCoolTime(400)
+	: m_dwCurSpawnTime(GetTickCount()), m_dwSpawnCoolTime(460)
 {
 	MakeStockObstacle();
 }
@@ -38,7 +38,7 @@ void CObstacleMgr_JW::Update()
 	{
 		m_dwCurSpawnTime = GetTickCount();
 
-		int iRand = rand() % 3;
+		int iRand = rand() % 4;
 
 		if (iRand == 0)
 		{
@@ -49,19 +49,30 @@ void CObstacleMgr_JW::Update()
 			MakeObstacle();
 			MakeObstacle();
 		}
-		else
+		else if (iRand == 2)
 		{
 			MakeObstacle();
 			MakeObstacle();
 			MakeObstacle();
 		}
+		else if (iRand = rand() % 2)
+		{
+			MakeObstacle();
+			MakeObstacle();
+			MakeObstacle();
+			MakeObstacle();
+			MakeObstacle();
+		}
 	}
+
+	// if (!CObjMgr_JW::GetInstance()->GetObjList(ObjType_JW::Obstacle).empty())
+	//	DEBUG_JW::DBG_WindowText(CObjMgr_JW::GetInstance()->GetFrontObj(ObjType_JW::Obstacle)->GetDistance());
 }
 
 void CObstacleMgr_JW::PushObstacle(CObj_JW* pObstacle)
 {
-	pObstacle->Initialize();
-	m_queueObstacle.push(pObstacle);
+//	pObstacle->Initialize();
+//	m_queueObstacle.push(pObstacle);
 }
 
 void CObstacleMgr_JW::MakeObstacle()
@@ -69,18 +80,17 @@ void CObstacleMgr_JW::MakeObstacle()
 	if (m_queueObstacle.size() == 0)
 		MakeStockObstacle();
 
-	CObj_JW* pObstacle = m_queueObstacle.front();
-	pObstacle->Initialize();
-	
-	m_queueObstacle.pop();
+	m_queueObstacle.front()->Initialize();
 
-//	CObj_JW* pObstacle = new CObstacle_JW;
-//	pObstacle->SetParent_JW(CObjMgr_JW::GetInstance()->GetFrontObj(ObjType_JW::Hexagon));
-//	pObstacle->Initialize();
+	//CObj_JW* pObstacle = new CObstacle_JW;
+	//pObstacle->SetParent_JW(CObjMgr_JW::GetInstance()->GetFrontObj(ObjType_JW::Hexagon));
+	//pObstacle->Initialize();
 
 	CObjMgr_JW::GetInstance()->PushBackObj
 	(
 		ObjType_JW::Obstacle,
-		pObstacle
+		m_queueObstacle.front()
 	);
+
+	m_queueObstacle.pop();
 }

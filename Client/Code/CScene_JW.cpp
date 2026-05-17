@@ -7,6 +7,7 @@
 
 #include "CObjMgr_JW.h"
 #include "CObstacleMgr_JW.h"
+#include "CCollisionMgr_JW.h"
 
 CScene_JW::CScene_JW()
 {
@@ -42,11 +43,14 @@ void CScene_JW::LateUpdate()
 {
 	CObjMgr_JW::GetInstance()->LateUpdate();
 
+//	CCollisionMgr_JW::CheckCollision_SAT(ObjType_JW::Player, ObjType_JW::Obstacle);
+	CCollisionMgr_JW::CheckCollision();
 }
 
 void CScene_JW::Render(HDC hDC)
 {
 	CObjMgr_JW::GetInstance()->Render(hDC);
+
 
 }
 

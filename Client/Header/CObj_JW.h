@@ -3,7 +3,7 @@
 #include "Define_JW.h"
 
 class CObj_JW abstract
-	: public CBase
+	//: public CBase
 {
 public:
 	explicit CObj_JW();
@@ -20,10 +20,12 @@ public:
 	const _vec3&	GetPosVec3_JW()		const { return m_tWorldInfo.vPos; }
 	const _vec3&	GetRotVec3_JW()		const { return m_tWorldInfo.vRotate; }
 	const _vec3&	GetScaleVec3_JW()	const { return m_tWorldInfo.vScale; }
+	const vector<_vec3*>& const GetWorldVertex() const { return m_vecWorldVertex; }
+	virtual const _uint&& const GetIDX() const { return -1; }
+	virtual const _float&& const GetDistance() const { return 0.f; }
 
 protected:
 	void Initialize_WorldVertex();
-
 protected:
 	INFO_JW m_tLocalInfo;
 	INFO_JW m_tWorldInfo;
@@ -32,7 +34,7 @@ protected:
 	vector<_vec3*> m_vecWorldVertex;
 
 private:
-	void Free() override;
+	virtual void Free();
 
 public:
 	const CObj_JW* const GetParent_JW() const { return m_pParent; }
@@ -43,7 +45,7 @@ public:
 			return;
 
 		m_pParent = pParent;
-		m_pParent->AddRef();
+//		m_pParent->AddRef();
 
 		m_pParent->SetChild_JW(this);
 	}
@@ -53,10 +55,17 @@ public:
 			return;
 
 		m_pChild = pChild;
-		m_pChild->AddRef();
+//		m_pChild->AddRef();
 
 		m_pChild->SetParent_JW(this);
 	}
+public:
+	void OnCollisionStay(bool bIsCollided) 
+	{
+		m_bIsCollided = bIsCollided;
+	};
+protected:
+	bool m_bIsCollided = false;
 
 protected:
 	CObj_JW* m_pParent	= nullptr;

@@ -87,9 +87,6 @@
     <ClInclude Include="..\Header\CObjMgr_JW.h">
       <Filter>_JW\Manager\ObjectManager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CObstacleMgr_JW.h">
-      <Filter>_JW\ObstacleSpawner</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\CSpace_JW.h">
       <Filter>_JW\Obj_JW\Space</Filter>
     </ClInclude>
@@ -107,6 +104,12 @@
     </ClInclude>
     <ClInclude Include="..\Header\CSceneMgr_.h">
       <Filter>_JW\Manager\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CCollisionMgr_JW.h">
+      <Filter>_JW\Manager\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CObstacleMgr_JW.h">
+      <Filter>_JW\ObstacleSpawner</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +151,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\CSceneMgr_.cpp">
       <Filter>_JW\Manager\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CCollisionMgr_JW.cpp">
+      <Filter>_JW\Manager\CollisionManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -21,43 +21,42 @@ void CHexagon_JW::Initialize()
 		{
 			-SIZE_HEX_JW * RATIO_HEX_X_JW,
 			-SIZE_HEX_JW,
-			0.f,
+			0.f // -SIZE_HEX_Z_JW * 0.5f,
 		});
 
 	m_vecLocalVertex.push_back(new _vec3
 		{
 			0.f,
 			-SIZE_HEX_JW * RATIO_HEX_Y_JW,
-			0.f,
+			0.f // -SIZE_HEX_Z_JW * 0.5f,
 		});
 
 	m_vecLocalVertex.push_back(new _vec3
 		{
 			+SIZE_HEX_JW * RATIO_HEX_X_JW,
 			-SIZE_HEX_JW,
-
-			0.f,
+			0.f // -SIZE_HEX_Z_JW * 0.5f,
 		});
 
 	m_vecLocalVertex.push_back(new _vec3
 		{
 			+SIZE_HEX_JW * RATIO_HEX_X_JW,
 			+SIZE_HEX_JW,
-			0.f,
+			0.f // -SIZE_HEX_Z_JW * 0.5f,
 		});
 
 	m_vecLocalVertex.push_back(new _vec3
 		{
 			0.f,
 			SIZE_HEX_JW * RATIO_HEX_Y_JW,
-			0.f,
+			0.f // -SIZE_HEX_Z_JW * 0.5f,
 		});
 
 	m_vecLocalVertex.push_back(new _vec3
 		{
 			-SIZE_HEX_JW * RATIO_HEX_X_JW,
 			SIZE_HEX_JW,
-			0.f,
+			0.f // -SIZE_HEX_Z_JW * 0.5f,
 		});
 
 	///
@@ -66,42 +65,42 @@ void CHexagon_JW::Initialize()
 		{
 			-SIZE_HEX_JW * RATIO_HEX_X_JW,
 			-SIZE_HEX_JW,
-			SIZE_HEX_JW * 0.5f,
+			 SIZE_HEX_Z_JW * 0.5f,
 		});
 
 	m_vecLocalVertex.push_back(new _vec3
 		{
 			0.f,
 			-SIZE_HEX_JW * RATIO_HEX_Y_JW,
-			SIZE_HEX_JW * 0.5f,
+			SIZE_HEX_Z_JW * 0.5f,
 		});
 
 	m_vecLocalVertex.push_back(new _vec3
 		{
 			+SIZE_HEX_JW * RATIO_HEX_X_JW,
 			-SIZE_HEX_JW,
-			SIZE_HEX_JW * 0.5f,
+			SIZE_HEX_Z_JW * 0.5f,
 		});
 
 	m_vecLocalVertex.push_back(new _vec3
 		{
 			+SIZE_HEX_JW * RATIO_HEX_X_JW,
 			+SIZE_HEX_JW,
-			SIZE_HEX_JW * 0.5f,
+			SIZE_HEX_Z_JW * 0.5f,
 		});
 
 	m_vecLocalVertex.push_back(new _vec3
 		{
 			0.f,
 			SIZE_HEX_JW * RATIO_HEX_Y_JW,
-			SIZE_HEX_JW * 0.5f,
+			SIZE_HEX_Z_JW * 0.5f,
 		});
 
 	m_vecLocalVertex.push_back(new _vec3
 		{
 			-SIZE_HEX_JW * RATIO_HEX_X_JW,
 			SIZE_HEX_JW,
-			SIZE_HEX_JW * 0.5f,
+			SIZE_HEX_Z_JW * 0.5f,
 		});
 
 	m_tLocalInfo.vDir = { 1.f, 0.f, 0.f };
@@ -124,7 +123,7 @@ int CHexagon_JW::Update()
 	// 이 구조는 딱히 권장하지 않음
 	m_pParent->Update();
 
-	m_pChild->Update();
+//	m_pChild->Update();
 
 	return 0;
 }
@@ -152,25 +151,120 @@ void CHexagon_JW::LateUpdate()
 
 	m_pParent->LateUpdate();
 
-	m_pChild->LateUpdate();
+//	m_pChild->LateUpdate();
 }
 
 void CHexagon_JW::Render(HDC hDC)
 {
-	MoveToEx(hDC, m_vecWorldVertex[0]->x, m_vecWorldVertex[0]->y, NULL);
+	//MoveToEx(hDC, m_vecWorldVertex[0]->x, m_vecWorldVertex[0]->y, NULL);
 
-	for (int i = 0; i < m_vecLocalVertex.size(); ++i)
-		LineTo(hDC, m_vecWorldVertex[i]->x, m_vecWorldVertex[i]->y);
+	//for (int i = 0; i < COUNT_HEX_VTX_JW; ++i)
+	//	LineTo(hDC, m_vecWorldVertex[i]->x, m_vecWorldVertex[i]->y);
 
-	LineTo(hDC, m_vecWorldVertex[0]->x, m_vecWorldVertex[0]->y);
+	//LineTo(hDC, m_vecWorldVertex[0]->x, m_vecWorldVertex[0]->y);
 
-	m_pChild->Render(hDC);
+	//for (int i = 0; i < COUNT_HEX_VTX_JW; ++i)
+	//{
+	//	MoveToEx(hDC, m_vecWorldVertex[i]->x, m_vecWorldVertex[i]->y, NULL);
+	//	LineTo(hDC, m_vecWorldVertex[i + COUNT_HEX_VTX_JW]->x, m_vecWorldVertex[i + COUNT_HEX_VTX_JW]->y);
+	//}
+
+	//for (int i = 0; i < COUNT_HEX_VTX_JW; ++i)
+	//	LineTo(hDC, m_vecWorldVertex[i + COUNT_HEX_VTX_JW]->x, m_vecWorldVertex[i + COUNT_HEX_VTX_JW]->y);
+
+	/// 색으로 한 번 ㄱㄱ ///
+
+	POINT ptPolygon[COUNT_HEX_VTX_JW];
+	for (int i = 0; i < COUNT_HEX_VTX_JW; ++i)
+	{
+		ptPolygon[i].x = (_long)m_vecWorldVertex[i]->x;
+		ptPolygon[i].y = (_long)m_vecWorldVertex[i]->y;
+	}
+
+	HBRUSH  hSolidBrush = CreateSolidBrush(RGB(255, 100, 100));
+	HBRUSH	hOldBrush = (HBRUSH)SelectObject(hDC, hSolidBrush);
+
+	Polygon(hDC, ptPolygon, COUNT_HEX_VTX_JW);
+
+	SelectObject(hDC, hOldBrush);
+	DeleteObject(hSolidBrush);
+
+	//for (int i = 0; i < COUNT_HEX_VTX_JW; ++i)
+	//{
+	//	ptPolygon[i].x = (_long)m_vecWorldVertex[i + COUNT_HEX_VTX_JW]->x;
+	//	ptPolygon[i].y = (_long)m_vecWorldVertex[i + COUNT_HEX_VTX_JW]->y;
+	//}
+
+	//hSolidBrush = CreateSolidBrush(RGB(255, 50, 0));
+	//hOldBrush = (HBRUSH)SelectObject(hDC, hSolidBrush);
+
+	//Polygon(hDC, ptPolygon, COUNT_HEX_VTX_JW);
+
+	//SelectObject(hDC, hOldBrush);
+	//DeleteObject(hSolidBrush);
+
+	//POINT ptPolygon_Side[4];
+
+	//for (int j = 0; j < 5; ++j)
+	//{
+	//	MoveToEx(hDC, m_vecWorldVertex[j + 6]->x, m_vecWorldVertex[j + 6]->y, NULL);
+
+	//	ptPolygon_Side[0].x = (_long)m_vecWorldVertex[j + 6]->x;
+	//	ptPolygon_Side[0].y = (_long)m_vecWorldVertex[j + 6]->y;
+
+	//	ptPolygon_Side[1].x = (_long)m_vecWorldVertex[j + 7]->x;
+	//	ptPolygon_Side[1].y = (_long)m_vecWorldVertex[j + 7]->y;
+
+	//	ptPolygon_Side[2].x = (_long)m_vecWorldVertex[j + 1]->x;
+	//	ptPolygon_Side[2].y = (_long)m_vecWorldVertex[j + 1]->y;
+
+	//	ptPolygon_Side[3].x = (_long)m_vecWorldVertex[j + 0]->x;
+	//	ptPolygon_Side[3].y = (_long)m_vecWorldVertex[j + 0]->y;
+
+	//	hSolidBrush = CreateSolidBrush(RGB(255, 50 + ((j + 1) % 2) * 100, 80));
+	//	hOldBrush = (HBRUSH)SelectObject(hDC, hSolidBrush);
+
+	//	Polygon(hDC, ptPolygon_Side, 4);
+
+	//	SelectObject(hDC, hOldBrush);
+	//	DeleteObject(hSolidBrush);
+	//}
+
+	//MoveToEx(hDC, m_vecWorldVertex[0 + 6]->x, m_vecWorldVertex[0 + 6]->y, NULL);
+
+	//ptPolygon_Side[0].x = (_long)m_vecWorldVertex[5 + 6]->x;
+	//ptPolygon_Side[0].y = (_long)m_vecWorldVertex[5 + 6]->y;
+
+	//ptPolygon_Side[1].x = (_long)m_vecWorldVertex[5 + 0]->x;
+	//ptPolygon_Side[1].y = (_long)m_vecWorldVertex[5 + 0]->y;
+
+	//ptPolygon_Side[2].x = (_long)m_vecWorldVertex[0]->x;
+	//ptPolygon_Side[2].y = (_long)m_vecWorldVertex[0]->y;
+
+	//ptPolygon_Side[3].x = (_long)m_vecWorldVertex[5]->x;
+	//ptPolygon_Side[3].y = (_long)m_vecWorldVertex[5]->y;
+
+	//hSolidBrush = CreateSolidBrush(RGB(255, 50 + 100, 80));
+	//hOldBrush = (HBRUSH)SelectObject(hDC, hSolidBrush);
+
+	//Polygon(hDC, ptPolygon_Side, 4);
+
+	//SelectObject(hDC, hOldBrush);
+	//DeleteObject(hSolidBrush);
+
+	// 6 7 1 0
+	// 
+
+	m_pParent->Render(hDC);
+//	m_pChild->Render(hDC);
 }
 
 void CHexagon_JW::Free()
 {
-	Safe_Release<CObj_JW*>(m_pChild);
+	// Safe_Release<CObj_JW*>(m_pChild);
+	// Safe_Delete<CObj_JW*>(m_pChild);
 
 	// 부모를 나중에? 근데 이렇게 하는게 맞나 싶긴 하네
-	Safe_Release<CObj_JW*>(m_pParent);
+	// Safe_Release<CObj_JW*>(m_pParent);
+	Safe_Delete<CObj_JW*>(m_pParent);
 }

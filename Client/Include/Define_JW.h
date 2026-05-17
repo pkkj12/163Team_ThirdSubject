@@ -1,7 +1,7 @@
 #pragma once
 #include "Engine_Define.h"
 
-#define EPSILON_JW 0.001f
+#define EPSILON_JW			0.001f
 
 #define OBJ_NOEVENT_JW		0
 #define OBJ_DESTROY_JW		1
@@ -61,9 +61,10 @@ typedef struct tagInfo_JW
 enum class ObjType_JW
 	: _ushort
 {
-	Hexagon,	// À°°¢Çü
-	Player,		// »ï°¢Çü
 	Obstacle,	// Àå¾Ö¹°, »ç´Ù¸®²Ã
+	Player,		// »ï°¢Çü
+
+	Hexagon,	// À°°¢Çü
 
 	End
 };

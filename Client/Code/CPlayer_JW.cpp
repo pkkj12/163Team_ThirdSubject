@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "CPlayer_JW.h"
 
+#include "CObjMgr_JW.h"
+
 CPlayer_JW::CPlayer_JW()
 {
 
@@ -37,6 +39,9 @@ void CPlayer_JW::Initialize()
 	__super::Initialize_WorldVertex();
 
 	m_tWorldInfo.vPos = m_pParent->GetInfo_JW().vPos;
+	m_tWorldInfo.vRotate.z = D3DXToRadian(-30.f - -36000.f);
+
+	CObjMgr_JW::GetInstance()->PushBackObj(ObjType_JW::Player, this);
 }
 
 int CPlayer_JW::Update()
@@ -77,8 +82,30 @@ void CPlayer_JW::Render(HDC hDC)
 
 	LineTo(hDC, m_vecWorldVertex[0]->x, m_vecWorldVertex[0]->y);
 
+	///
+
+	POINT ptPolygon[3];
+	for (int i = 0; i < 3; ++i)
+	{
+		ptPolygon[i].x = (_long)m_vecWorldVertex[i]->x;
+		ptPolygon[i].y = (_long)m_vecWorldVertex[i]->y;
+	}
+
+	HBRUSH  hSolidBrush = CreateSolidBrush
+	(
+		m_bIsCollided ? RGB(0, 0, 255) :
+		RGB(255, 255, 255)
+	);
+
+	HBRUSH	hOldBrush = (HBRUSH)SelectObject(hDC, hSolidBrush);
+
+	Polygon(hDC, ptPolygon, 3);
+
+	SelectObject(hDC, hOldBrush);
+	DeleteObject(hSolidBrush);
+
 #ifdef _DEBUG
-	DBG_WindowText();
+//	DBG_WindowText();
 #endif
 }
 
@@ -93,8 +120,7 @@ void CPlayer_JW::Key_Input()
 #ifdef _DEBUG
 void CPlayer_JW::DBG_WindowText()
 {
-	float fRotZ = fmodf(D3DXToDegree(m_tWorldInfo.vRotate.z), 360.f);
-	_uint iIndex = (_uint)(fRotZ / 60.f);
-	SetWindowText(g_hWnd, to_wstring(iIndex).c_str());
+//	DEBUG_JW::DBG_WindowText(GetIDX());
+//	SetWindowText(g_hWnd, to_wstring(m_bIsCollided).c_str());
 }
 #endif

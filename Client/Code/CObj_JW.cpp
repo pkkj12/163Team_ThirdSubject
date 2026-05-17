@@ -14,25 +14,22 @@ CObj_JW::~CObj_JW()
 
 void CObj_JW::Initialize_WorldVertex()
 {
-	for_each(m_vecWorldVertex.begin(), m_vecWorldVertex.end(), [](_vec3*& pV)
-		{
-			Safe_Delete<_vec3*>(pV);
-		});
-	m_vecWorldVertex.clear();
-
-	for (int i = 0; i < m_vecLocalVertex.size(); ++i)
-		m_vecWorldVertex.push_back(new _vec3);
+	if (m_vecWorldVertex.size() == 0) 
+	{
+		for (int i = 0; i < m_vecLocalVertex.size(); ++i)
+			m_vecWorldVertex.push_back(new _vec3);
+	}
 }
 
 void CObj_JW::Free()
 {
-	for_each(m_vecLocalVertex.begin(), m_vecLocalVertex.end(), [](_vec3*& pV)
+	for_each(m_vecLocalVertex.begin(), m_vecLocalVertex.end(), [](auto pV)
 		{
 			Safe_Delete<_vec3*>(pV);
 		});
 	m_vecLocalVertex.clear();
 
-	for_each(m_vecWorldVertex.begin(), m_vecWorldVertex.end(), [](_vec3*& pV)
+	for_each(m_vecWorldVertex.begin(), m_vecWorldVertex.end(), [](auto pV)
 		{
 			Safe_Delete<_vec3*>(pV);
 		});

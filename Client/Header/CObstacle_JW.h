@@ -17,6 +17,9 @@ public:
     void LateUpdate() override;
     void Render(HDC hDC) override;
 
+    const _uint&& GetIDX() const override { return m_iSideIDX; }
+    const _float&& GetDistance() const override { return move(m_fDistance); }
+
 private:
     int     m_iSideIDX;
     float   m_fDistance;

@@ -2,7 +2,7 @@
 #include "CSpace_JW.h"
 
 CSpace_JW::CSpace_JW()
-	: m_dwTime(GetTickCount())
+	: m_dwTurnTime(GetTickCount())
 {
 
 }
@@ -79,9 +79,24 @@ int CSpace_JW::Update()
 
 void CSpace_JW::LateUpdate()
 {
-	if (m_dwTime + 10000 < GetTickCount())
+	if (m_dwTurnTime + 10000 < GetTickCount())
 	{
 		m_tWorldInfo.vDir.z = -m_tWorldInfo.vDir.z;
-		m_dwTime = GetTickCount();
+		m_dwTurnTime = GetTickCount();
 	}
+
+	m_dwCurTime = GetTickCount();
+}
+
+void CSpace_JW::Render(HDC hDC)
+{
+	_long dwTime = m_dwCurTime - m_dwFirstTime;
+
+	wstring wsTimeText =
+		L"½Ã°£: " + to_wstring(dwTime / 1000.f);
+//	SetWindowText(g_hWnd, wsTimeText.c_str());
+
+	TextOut(hDC, WINCX - 90 - 18, WINCY - 18, wsTimeText.c_str(), wsTimeText.size());
+
+	DEBUG_JW::DBG_WindowText(m_tWorldInfo.vRotate);
 }

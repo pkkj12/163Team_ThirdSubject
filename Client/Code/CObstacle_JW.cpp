@@ -8,11 +8,6 @@ CObstacle_JW::CObstacle_JW()
 {
 	m_vecLocalVertex.reserve(4);
 	m_vecWorldVertex.reserve(4);
-
-	for (int i = 0; i < 4; ++i)
-		m_vecLocalVertex.push_back(new _vec3{ 0, 0, 0 });
-
-	__super::Initialize_WorldVertex();
 }
 
 CObstacle_JW::~CObstacle_JW()
@@ -23,8 +18,14 @@ CObstacle_JW::~CObstacle_JW()
 void CObstacle_JW::Initialize()
 {
 	// 풀링 쓰려고 세팅하는 거
+	if (m_vecLocalVertex.size() == 0)
+		for (int i = 0; i < 4; ++i)
+			m_vecLocalVertex.push_back(new _vec3{ 0, 0, 0 });
+
+	__super::Initialize_WorldVertex();
 
 	m_iSideIDX = rand() % 6;
+//m_iSideIDX = 0;
 	m_fDistance = 4.f;
 	m_fSpeed = 1.5f;
 
@@ -48,7 +49,7 @@ void CObstacle_JW::Initialize()
 int CObstacle_JW::Update()
 {
 	if (m_bDestory)
-		return OBJ_HANDOVER_JW;
+		return OBJ_DESTROY_JW;
 
 	m_fDistance -= 0.01f * m_fSpeed;
 	m_tWorldInfo.vScale.x = m_fDistance;
@@ -61,7 +62,7 @@ void CObstacle_JW::LateUpdate()
 {
 	if (m_fDistance <= EPSILON_JW)
 	{
-		CObstacleMgr_JW::GetInstance()->PushObstacle(this);
+//		CObstacleMgr_JW::GetInstance()->PushObstacle(this);
 		m_bDestory = true;
 
 		return;
@@ -93,23 +94,23 @@ void CObstacle_JW::LateUpdate()
 
 void CObstacle_JW::Render(HDC hDC)
 {
-	MoveToEx(hDC, m_vecWorldVertex[0]->x, m_vecWorldVertex[0]->y, NULL);
+	//MoveToEx(hDC, m_vecWorldVertex[0]->x, m_vecWorldVertex[0]->y, NULL);
 
-	for (int i = 0; i < m_vecWorldVertex.size(); ++i)
-		LineTo(hDC, m_vecWorldVertex[i]->x, m_vecWorldVertex[i]->y);
+	//for (int i = 0; i < m_vecWorldVertex.size(); ++i)
+	//	LineTo(hDC, m_vecWorldVertex[i]->x, m_vecWorldVertex[i]->y);
 
-	LineTo(hDC, m_vecWorldVertex[0]->x, m_vecWorldVertex[0]->y);
+	//LineTo(hDC, m_vecWorldVertex[0]->x, m_vecWorldVertex[0]->y);
 
 	POINT pt[4];
 	for (int i = 0; i < 4; ++i) 
 	{
-		pt[i].x = (LONG)m_vecWorldVertex[i]->x;
-		pt[i].y = (LONG)m_vecWorldVertex[i]->y;
+		pt[i].x = (_long)m_vecWorldVertex[i]->x;
+		pt[i].y = (_long)m_vecWorldVertex[i]->y;
 	}
 	
-	HBRUSH hSolidBrush = CreateSolidBrush(RGB(255, 80, 80));
-	HBRUSH hOldBrush = (HBRUSH)SelectObject(hDC, hSolidBrush);
-	HPEN hOldPen = (HPEN)SelectObject(hDC, GetStockObject(NULL_PEN));
+	HBRUSH hSolidBrush	= CreateSolidBrush(RGB(255, 50 + (m_iSideIDX % 2 * 100), 80));
+	HBRUSH hOldBrush	= (HBRUSH)SelectObject(hDC, hSolidBrush);
+	HPEN hOldPen		= (HPEN)SelectObject(hDC, GetStockObject(NULL_PEN));
 	
 	Polygon(hDC, pt, 4);
 	
