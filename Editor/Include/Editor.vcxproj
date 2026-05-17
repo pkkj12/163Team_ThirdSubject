@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{ac7eee1c-f256-4ba6-91d5-5da5377a1567}</ProjectGuid>
-    <RootNamespace>Client</RootNamespace>
+    <ProjectGuid>{508174d8-4646-490a-a0af-99e4438ca41b}</ProjectGuid>
+    <RootNamespace>Editor</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -113,13 +113,12 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>../Header;../Include;../../Base;../../Reference/Header;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Header;../Include;../../Base;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../Reference/Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dxguid.lib;dinput8.lib;Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dxguid.lib;dinput8.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -139,41 +138,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Header\CCollisionMgr.h" />
-    <ClInclude Include="..\Header\CLineMgr_YJ.h" />
-    <ClInclude Include="..\Header\CLine_YJ.h" />
-    <ClInclude Include="..\Header\CMainApp.h" />
-    <ClInclude Include="..\Header\CObjMgr_YJ.h" />
-    <ClInclude Include="..\Header\CObjYJ.h" />
-    <ClInclude Include="..\Header\CObstacle.h" />
-    <ClInclude Include="..\Header\CPlayer_YJ.h" />
-    <ClInclude Include="..\Header\CScene_YJ.h" />
-    <ClInclude Include="..\Header\CScrollMgr_YJ.h" />
-    <ClInclude Include="..\Header\CShield_YJ.h" />
-    <ClInclude Include="..\Header\CTimeMgr_YJ.h" />
-    <ClInclude Include="..\Header\CVampSurvival.h" />
-    <ClInclude Include="Client.h" />
-    <ClInclude Include="Define_YJ.h" />
+    <ClInclude Include="..\Header\CKeyMgr.h" />
+    <ClInclude Include="..\Header\CLine.h" />
+    <ClInclude Include="..\Header\CLineMgr.h" />
+    <ClInclude Include="..\Header\CMainEditorApp.h" />
+    <ClInclude Include="..\Header\CScrollMgr.h" />
+    <ClInclude Include="Define.h" />
+    <ClInclude Include="Editor.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Code\CCollisionMgr.cpp" />
-    <ClCompile Include="..\Code\CLineMgr_YJ.cpp" />
-    <ClCompile Include="..\Code\CLine_YJ.cpp" />
-    <ClCompile Include="..\Code\CMainApp.cpp" />
-    <ClCompile Include="..\Code\CObjMgr_YJ.cpp" />
-    <ClCompile Include="..\Code\CObjYJ.cpp" />
-    <ClCompile Include="..\Code\CObstacle.cpp" />
-    <ClCompile Include="..\Code\CPlayer_YJ.cpp" />
-    <ClCompile Include="..\Code\CScene_YJ.cpp" />
-    <ClCompile Include="..\Code\CScrollMgr_YJ.cpp" />
-    <ClCompile Include="..\Code\CShield_YJ.cpp" />
-    <ClCompile Include="..\Code\CTimeMgr_YJ.cpp" />
-    <ClCompile Include="..\Code\CVampSurvival.cpp" />
-    <ClCompile Include="Client.cpp" />
+    <ClCompile Include="..\Code\CKeyMgr.cpp" />
+    <ClCompile Include="..\Code\CLine.cpp" />
+    <ClCompile Include="..\Code\CLineMgr.cpp" />
+    <ClCompile Include="..\Code\CMainEditorApp.cpp" />
+    <ClCompile Include="..\Code\CScrollMgr.cpp" />
+    <ClCompile Include="Editor.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -182,10 +165,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Client.rc" />
+    <ResourceCompile Include="Editor.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Client.ico" />
+    <Image Include="Editor.ico" />
     <Image Include="small.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

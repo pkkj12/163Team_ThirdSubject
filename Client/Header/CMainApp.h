@@ -4,6 +4,8 @@
 #include "Engine_Define.h"
 #include "CGraphicDev.h"
 
+class CObj;
+class CScene_YJ;
 class CMainApp
 	: public CBase
 {	
@@ -16,9 +18,18 @@ public:
 	int				Update_MainApp(const _float& fTimeDelta);
 	void			LateUpdate_MainApp(const _float& fTimeDelta);
 	void			Render_MainApp();
+//private:
+	//Engine::CGraphicDev* m_pDeviceClass;
+	//LPDIRECT3DDEVICE9		m_pGraphicDev;
+
 private:
-	Engine::CGraphicDev* m_pDeviceClass;
-	LPDIRECT3DDEVICE9		m_pGraphicDev;
+	HDC        m_hDC = NULL;
+	HDC        m_hBackDC = NULL;
+	HBITMAP		m_hBMP = NULL;
+	HBITMAP		m_hOldBMP = NULL;
+
+
+	CScene_YJ* m_pSceneYJ;
 
 public:
 	static CMainApp* Create();		// 생성 함수
