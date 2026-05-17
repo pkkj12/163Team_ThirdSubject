@@ -53,6 +53,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     if (nullptr == pMainApp)
         return FALSE;
 
+    DWORD dwTime(0);
+
     while (true)
     {
         if (PeekMessage(&msg,nullptr,0,0,PM_REMOVE))
@@ -64,11 +66,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                 DispatchMessage(&msg);
             }
         }
-        else
+        else if (dwTime + 10 < GetTickCount())
         {
             pMainApp->Update_MainApp(0.f);
             pMainApp->LateUpdate_MainApp(0.f);
             pMainApp->Render_MainApp();
+
+            dwTime = GetTickCount();
         }
     }
     _ulong dwRefCnt = 0;

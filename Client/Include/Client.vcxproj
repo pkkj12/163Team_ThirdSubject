@@ -113,7 +113,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>../Header;../../Base;../../Reference/Header;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Include;../Header;../../Base;../../Reference/Header;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -140,7 +140,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\CMainApp.h" />
+    <ClInclude Include="..\Header\CObjMgr_JW.h" />
+    <ClInclude Include="..\Header\CObj_JW.h" />
+    <ClInclude Include="..\Header\CHexagon_JW.h" />
+    <ClInclude Include="..\Header\CObstacleMgr_JW.h" />
+    <ClInclude Include="..\Header\CObstacle_JW.h" />
+    <ClInclude Include="..\Header\CPlayer_JW.h" />
+    <ClInclude Include="..\Header\CSceneMgr_.h" />
+    <ClInclude Include="..\Header\CScene_JW.h" />
+    <ClInclude Include="..\Header\CSpace_JW.h" />
+    <ClInclude Include="..\Header\CScene.h" />
     <ClInclude Include="Client.h" />
+    <ClInclude Include="Define_JW.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
@@ -148,6 +159,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\CMainApp.cpp" />
+    <ClCompile Include="..\Code\CObjMgr_JW.cpp" />
+    <ClCompile Include="..\Code\CObj_JW.cpp" />
+    <ClCompile Include="..\Code\CHexagon_JW.cpp" />
+    <ClCompile Include="..\Code\CObstacleMgr_JW.cpp" />
+    <ClCompile Include="..\Code\CObstacle_JW.cpp" />
+    <ClCompile Include="..\Code\CPlayer_JW.cpp" />
+    <ClCompile Include="..\Code\CSceneMgr_.cpp" />
+    <ClCompile Include="..\Code\CScene_JW.cpp" />
+    <ClCompile Include="..\Code\CSpace_JW.cpp" />
+    <ClCompile Include="..\Code\CScene.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
