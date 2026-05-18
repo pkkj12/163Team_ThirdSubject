@@ -6,8 +6,9 @@
 #include "CObstacle.h"
 #include "CLine_YJ.h"
 #include "CScrollMgr_YJ.h"
+#include "CBoss_YJ.h"
 
-CVampSurvival::CVampSurvival() : m_pPlayer(nullptr)
+CVampSurvival::CVampSurvival() : m_pPlayer(nullptr), m_fTime(0.f), m_bIsEnd(0.f)
 {
 }
 
@@ -26,6 +27,11 @@ void CVampSurvival::Initialize()
 	GET_SINGLE(CObjMgr_YJ)->AddObject(OBJ_PLAYER, m_pPlayer);
 	GET_SINGLE(CTimeMgr_YJ)->Initialize();
 
+
+	CObjYJ* pBoss = new CBoss_YJ;
+	pBoss->Ready();
+	pBoss->SetType(OBJ_BOSS);
+	GET_SINGLE(CObjMgr_YJ)->AddObject(OBJ_BOSS, pBoss);
 
 	//GET_SINGLE(CScrollMgr_YJ)->Scroll_Lock(1920.f, 1150.f);
 	// 라인 오브젝트 생성
@@ -60,6 +66,17 @@ void CVampSurvival::Initialize()
 void CVampSurvival::Update()
 {
 
+	if (!IsEndGame())
+	{
+		m_fTime += fDT;
+		
+	}
+	else
+	{
+		GET_SINGLE(CObjMgr_YJ)->Release();
+	}
+
+
 	GET_SINGLE(CTimeMgr_YJ)->Update();
 	GET_SINGLE(CObjMgr_YJ)->Update();
 	
@@ -73,9 +90,39 @@ void CVampSurvival::LateUpdate()
 
 void CVampSurvival::Render(HDC hMemDC)
 {
+	if (!IsEndGame())
+	{
+		DrawText(hMemDC, m_szSec, swprintf_s(m_szSec, L"시간: %d", (int)m_fTime), &m_rectTime, DT_CENTER);
+		DrawText(hMemDC, m_szSec, swprintf_s(m_szSec, L"Hp: %d", static_cast<CPlayer_YJ*>(m_pPlayer)->GetHp()), &m_rectHp, DT_LEFT);
+	}
+	else
+	{
+		if (static_cast<CPlayer_YJ*>(m_pPlayer)->IsDead())
+		{
+			HFONT titleFont, oldFont;
+			titleFont = CreateFont(80, 0, 0, 0, 0, 0, 0, 0, HANGEUL_CHARSET, 0, 0, 0, VARIABLE_PITCH, TEXT("Arial"));
+			oldFont = (HFONT)SelectObject(hMemDC, titleFont);
+			DrawText(hMemDC, L"게임 오버!", -1, &m_rectEnd, DT_CENTER | DT_SINGLELINE | DT_VCENTER);
+		}
+		else
+		{
+			HFONT titleFont, oldFont;
+			titleFont = CreateFont(80, 0, 0, 0, 0, 0, 0, 0, HANGEUL_CHARSET, 0, 0, 0, VARIABLE_PITCH, TEXT("Arial"));
+			oldFont = (HFONT)SelectObject(hMemDC, titleFont);
+			DrawText(hMemDC, L"게임 클리어!", -1, &m_rectEnd, DT_CENTER | DT_SINGLELINE | DT_VCENTER);
+		}
+	}
+	
+	
+
 	GET_SINGLE(CObjMgr_YJ)->Render(hMemDC);
 }
 
 void CVampSurvival::Release()
 {
+}
+
+bool CVampSurvival::IsEndGame()
+{
+	return static_cast<CPlayer_YJ*>(m_pPlayer)->IsDead() || m_fTime > 30.f;
 }

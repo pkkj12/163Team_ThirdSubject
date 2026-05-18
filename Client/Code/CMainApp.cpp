@@ -56,8 +56,8 @@ void CMainApp::Render_MainApp()
 	Rectangle(m_hBackDC, 0, 0, WINCX, WINCY);
 
 
+	m_pSceneYJ->Render(m_hBackDC);
 	BitBlt(m_hDC, 0, 0, WINCX, WINCY, m_hBackDC, 0, 0, SRCCOPY);
-	m_pSceneYJ->Render(m_hDC);
 
 	//m_pDeviceClass->Render_Begin(D3DXCOLOR(0.f, 0.f, 1.f, 1.f));
 

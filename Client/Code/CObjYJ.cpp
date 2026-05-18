@@ -3,7 +3,7 @@
 
 
 
-CObjYJ::CObjYJ()
+CObjYJ::CObjYJ() : m_fSpeed(0.f), m_fDistance(0.f), m_bIsCollide(false)
 {
 	ZeroMemory(&m_tInfo, sizeof(VECYJINFO));
 	//ZeroMemory(&m_tOriginInfo, sizeof(VECYJINFO));
@@ -18,10 +18,13 @@ CObjYJ::~CObjYJ()
 
 void CObjYJ::MakeWorldMatrix()
 {
-    D3DXMATRIX	matRotZ, matScale, matTrans;
+    D3DXMATRIX	matScale, matTrans;
+    D3DXMATRIX	matRot;
+
     // 회전 행렬
     //D3DXMatrixIdentity(&matRotZ); //포신만 돌아가게끔 하려고 단 사각형이 회전하지 않음 => 포신만 돌아가게하려면 포신 각도를 따로 두어야할까?
-    D3DXMatrixRotationZ(&matRotZ, m_vWorldAngle.z);
+    //D3DXMatrixRotationZ(&matRotZ, m_vWorldAngle.z);
+    D3DXMatrixRotationYawPitchRoll(&matRot, m_vWorldAngle.x, m_vWorldAngle.y, m_vWorldAngle.z);
 
     // 크기 행렬
     D3DXMatrixScaling(&matScale, m_vWorldScale.x, m_vWorldScale.y, m_vWorldScale.z);
@@ -29,7 +32,7 @@ void CObjYJ::MakeWorldMatrix()
     // 이동 행렬
     D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
 
-    m_tInfo.matWorld = matScale * matRotZ * matTrans;
+    m_tInfo.matWorld = matScale * matRot * matTrans;
 
 
 }

@@ -41,9 +41,13 @@ public:
 public:
 	vector<CObjYJ*>& GetObjList(YJUTIL::OBJ_TYPE eType)
 	{
+		if (eType == OBJ_MBULLET && !m_vecObjList[eType].empty())
+		{
+			wcout << format(L"{}",m_vecObjList[eType].empty()) << endl;
+		}
 		return m_vecObjList[eType];
 	}
-
+	CObjYJ* GetPlayer() const { return m_vecObjList[OBJ_PLAYER].front(); }
 
 	void Load_ObjData(const TCHAR* szPath, vector<DATA>* pObstacleList);
 private:

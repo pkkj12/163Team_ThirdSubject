@@ -16,6 +16,9 @@
 #include <vector>
 #include <map>
 #include <algorithm>
+#include <iostream>
+#include <format>
+#include <string>
 
 extern HWND g_hWnd;
 

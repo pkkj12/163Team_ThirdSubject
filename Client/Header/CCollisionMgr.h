@@ -8,8 +8,9 @@ class CCollisionMgr
 public:
 	void CheckCollision_SAT(YJUTIL::OBJ_TYPE TYPE1, YJUTIL::OBJ_TYPE TYPE2);
 	//bool IsCollide_SAT(const CObj* Obj1, const CObj* Obj2, D3DXVECTOR3* vAxis, float* fMinOverlapped); //MFV 넣어보기
-	bool IsCollide_SAT(const CObjYJ* Obj1, const CObjYJ* Obj2, D3DXVECTOR3* pOutAxis,
+	bool IsCollide_SAT(CObjYJ* Obj1, CObjYJ* Obj2, D3DXVECTOR3* pOutAxis,
 		float* pOutOverlap);
+
 	void Project(const CObjYJ* obj, const D3DXVECTOR3 vAxis, float& fOutMin, float& fOutMax);
 
 	void ResolveCollision(CObjYJ* Src,
@@ -30,10 +31,10 @@ public:
 		D3DXVECTOR3 push = fixedAxis * overlap;
 
 		// 플레이어만 밀기
-		if (Src->GetType() == OBJ_PLAYER)
+		if (Src->GetType() == OBJ_PLAYER || Src->GetType() == OBJ_BOSS)
 			Src->AddPos(push);
 
-		else if (Dst->GetType() == OBJ_PLAYER)
+		else if (Dst->GetType() == OBJ_PLAYER || Src->GetType() == OBJ_BOSS)
 			Dst->AddPos(-push);
 
 	}

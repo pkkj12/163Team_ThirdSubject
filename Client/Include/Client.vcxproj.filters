@@ -61,6 +61,18 @@
     <Filter Include="03. DesignPattern\04. ScrollManager">
       <UniqueIdentifier>{c1360d02-169b-46fe-be6e-1924eae2d8b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\02. Monster\00. Boss">
+      <UniqueIdentifier>{79160eeb-7cc2-4fee-94f7-ed5782a3fd01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\04. Bullet">
+      <UniqueIdentifier>{670dd859-7273-40e3-8c80-5afd7156d47b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\04. Bullet\PinWheel">
+      <UniqueIdentifier>{3b90cd34-8b30-407e-bc79-34a588fb41a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\05. Weapon">
+      <UniqueIdentifier>{015b8d98-5a65-42f3-8809-08264b8de70b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -120,6 +132,18 @@
     <ClInclude Include="..\Header\CScrollMgr_YJ.h">
       <Filter>03. DesignPattern\04. ScrollManager</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\CBoss_YJ.h">
+      <Filter>01. Obj\02. Monster\00. Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CMonster_YJ.h">
+      <Filter>01. Obj\02. Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CBullet_YJ.h">
+      <Filter>01. Obj\04. Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CPinWheel_YJ.h">
+      <Filter>01. Obj\04. Bullet\PinWheel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -166,6 +190,18 @@
     </ClCompile>
     <ClCompile Include="..\Code\CScrollMgr_YJ.cpp">
       <Filter>03. DesignPattern\04. ScrollManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CBoss_YJ.cpp">
+      <Filter>01. Obj\02. Monster\00. Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CMonster_YJ.cpp">
+      <Filter>01. Obj\02. Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CBullet_YJ.cpp">
+      <Filter>01. Obj\04. Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CPinWheel_YJ.cpp">
+      <Filter>01. Obj\04. Bullet\PinWheel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

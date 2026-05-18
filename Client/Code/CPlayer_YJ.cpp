@@ -2,9 +2,10 @@
 #include "CPlayer_YJ.h"
 #include "CShield_YJ.h"
 #include "CScrollMgr_YJ.h"
+#include "CTimeMgr_YJ.h"
 
-
-CPlayer_YJ::CPlayer_YJ() : m_vecPosin{}, m_pShield(nullptr)
+CPlayer_YJ::CPlayer_YJ() : m_vecPosin{}, m_pShield(nullptr), m_iLife(5), m_bDead(false), m_fGodTime(0.f)
+, m_bGod(false), m_fFadeTime(0.f), m_fDistance(0.f)
 {
 	m_vecOriginVertex.reserve(4);
 	m_vecVertex.reserve(4);
@@ -45,6 +46,25 @@ HRESULT CPlayer_YJ::Ready()
 
 int CPlayer_YJ::Update()
 {
+	if (m_iLife <= 0)
+		m_bDead = true;
+	if (m_bGod)
+	{
+		m_fGodTime += fDT;
+		m_fFadeTime += fDT;
+
+		if (m_fFadeTime >= 0.4f)
+			m_fFadeTime = 0.f;
+	}
+
+	if (m_fGodTime >= 3.f)
+	{
+		m_bGod = false;
+		m_fGodTime = 0;
+		m_fFadeTime = 0;
+	}
+		
+
 	Key_Input();
 	OffSet();
 	m_pShield->Update();
@@ -85,21 +105,50 @@ void CPlayer_YJ::Render(HDC hDC)
 {
 	float m_fScrollX = GET_SINGLE(CScrollMgr_YJ)->Get_ScrollX();
 	float m_fScrollY = GET_SINGLE(CScrollMgr_YJ)->Get_ScrollY();
-	MoveToEx(hDC, m_vecVertex[0]->x - m_fScrollX, m_vecVertex[0]->y - m_fScrollY, nullptr);
-	for (size_t i = 0; i < m_vecVertex.size(); ++i)
+
+	if (!m_bGod)
 	{
-		LineTo(hDC, m_vecVertex[i]->x - m_fScrollX, m_vecVertex[i]->y - m_fScrollY);
+		MoveToEx(hDC, m_vecVertex[0]->x - m_fScrollX, m_vecVertex[0]->y - m_fScrollY, nullptr);
+		for (size_t i = 0; i < m_vecVertex.size(); ++i)
+		{
+			LineTo(hDC, m_vecVertex[i]->x - m_fScrollX, m_vecVertex[i]->y - m_fScrollY);
+		}
+		LineTo(hDC, m_vecVertex[0]->x - m_fScrollX, m_vecVertex[0]->y - m_fScrollY);
+
+		MoveToEx(hDC, m_tInfo.vPos.x - m_fScrollX, m_tInfo.vPos.y - m_fScrollY, NULL);
+		LineTo(hDC, m_vecPosin.x - m_fScrollX, m_vecPosin.y - m_fScrollY);
+
+		m_pShield->Render(hDC);
 	}
-	LineTo(hDC, m_vecVertex[0]->x - m_fScrollX, m_vecVertex[0]->y - m_fScrollY);
+	else
+	{
+		if (m_fFadeTime > 0.2f)
+		{
+			MoveToEx(hDC, m_vecVertex[0]->x - m_fScrollX, m_vecVertex[0]->y - m_fScrollY, nullptr);
+			for (size_t i = 0; i < m_vecVertex.size(); ++i)
+			{
+				LineTo(hDC, m_vecVertex[i]->x - m_fScrollX, m_vecVertex[i]->y - m_fScrollY);
+			}
+			LineTo(hDC, m_vecVertex[0]->x - m_fScrollX, m_vecVertex[0]->y - m_fScrollY);
 
-	MoveToEx(hDC, m_tInfo.vPos.x - m_fScrollX, m_tInfo.vPos.y - m_fScrollY, NULL);
-	LineTo(hDC, m_vecPosin.x - m_fScrollX, m_vecPosin.y - m_fScrollY);
+			MoveToEx(hDC, m_tInfo.vPos.x - m_fScrollX, m_tInfo.vPos.y - m_fScrollY, NULL);
+			LineTo(hDC, m_vecPosin.x - m_fScrollX, m_vecPosin.y - m_fScrollY);
 
+		}
+	}
 	m_pShield->Render(hDC);
 }
 
 void CPlayer_YJ::Free()
 {
+}
+
+void CPlayer_YJ::SetCollide(CObjYJ* pObj)
+{
+	//if (!m_bGod && pObj->GetType() == OBJ_MBULLET)
+	//{
+	//	m_bGod = true;
+	//}
 }
 
 void CPlayer_YJ::OffSet()
@@ -166,6 +215,15 @@ void CPlayer_YJ::Key_Input()
 		m_vWorldAngle.z += 0.1f;
 	}
 
+	if (GetAsyncKeyState('J'))
+	{
+		m_vWorldAngle.x += 0.1f;
+	}
+	if (GetAsyncKeyState('K'))
+	{
+		m_vWorldAngle.y += 0.1f;
+	}
+
 	D3DXMATRIX matRot;
 	D3DXMatrixRotationZ(&matRot, m_vWorldAngle.z);
 
@@ -184,4 +242,5 @@ void CPlayer_YJ::Key_Input()
 		//D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
 		m_tInfo.vPos -= m_tInfo.vDir * 3.f;
 	}
+
 }

@@ -18,7 +18,18 @@ public:
 	void Release() override;
 
 private:
+	bool IsEndGame();
+
+private:
 	CObjYJ* m_pPlayer;
 	vector<DATA> m_tObstacles;
+	float		m_fTime;
+	bool		m_bIsEnd;
+
+
+	TCHAR		m_szSec[16];
+	RECT		m_rectHp = { 20, 20, 220, 70 };
+	RECT		m_rectTime = { WINCX / 2 - 300, 20, WINCX / 2 + 300, 70 };
+	RECT		m_rectEnd = { WINCX / 2 - 300, 200, WINCX / 2 + 300, 400 };
 };
 

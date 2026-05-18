@@ -1,4 +1,4 @@
-#include "pch.h"
+Ôªø#include "pch.h"
 #include "CObjMgr_YJ.h"
 #include "CCollisionMgr.h"
 
@@ -22,7 +22,8 @@ void CObjMgr_YJ::Initialize()
 void CObjMgr_YJ::Update()
 {
 	int iResult;
-
+	GET_SINGLE(CCollisionMgr)->CheckCollision_SAT(OBJ_OBSTACLE, OBJ_MBULLET);
+	GET_SINGLE(CCollisionMgr)->CheckCollision_SAT(OBJ_PLAYER, OBJ_MBULLET);
 	for (int i = 0; i < OBJ_END; ++i)
 	{
 		for (auto iter = m_vecObjList[i].begin(); iter != m_vecObjList[i].end();) {
@@ -50,11 +51,17 @@ void CObjMgr_YJ::LateUpdate()
 		for (auto& pObj : m_vecObjList[i])
 		{
 			if (pObj)
+			{
 				pObj->LateUpdate();
-
+				pObj->SetCollide(false);
+			}
 		}
 	}
+
+
 	GET_SINGLE(CCollisionMgr)->CheckCollision_SAT(OBJ_PLAYER, OBJ_OBSTACLE);
+	GET_SINGLE(CCollisionMgr)->CheckCollision_SAT(OBJ_BOSS, OBJ_OBSTACLE);
+
 	//GET_SINGLE(CCollisionMgr)->CheckCollision_SAT(OBJ_OBSTACLE, OBJ_PLAYER);
 }
 
@@ -105,16 +112,16 @@ void CObjMgr_YJ::Load_ObjData(const TCHAR* szPath, vector<DATA>* pObstacleList)
 			DATA tData{};
 
 			ReadFile(hObjFile, tData.szName, sizeof(TCHAR) * 32, &dwByte, NULL);
-			// 2. ºæ≈Õ
+			// 2. ÏÑºÌÑ∞
 			ReadFile(hObjFile, &tData.vCenter,
 				sizeof(D3DXVECTOR3), &dwByte, NULL);
 
-			// 3. ∂Û¿Œ ∞≥ºˆ
+			// 3. ÎùºÏù∏ Í∞úÏàò
 			int iLineCount = 0;
 			ReadFile(hObjFile, &iLineCount,
 				sizeof(int), &dwByte, NULL);
 
-			// 4. ∂Û¿Œ µ•¿Ã≈Õ
+			// 4. ÎùºÏù∏ Îç∞Ïù¥ÌÑ∞
 			for (int j = 0; j < iLineCount; ++j)
 			{
 				LINE_DATA line{};
@@ -124,14 +131,14 @@ void CObjMgr_YJ::Load_ObjData(const TCHAR* szPath, vector<DATA>* pObstacleList)
 				tData.vecLineData.push_back(line);
 			}
 
-			// 5. ≈∏¿‘ ∫–∑˘
+			// 5. ÌÉÄÏûÖ Î∂ÑÎ•ò
 			if (wcscmp(tData.szName, L"OBSTACLE") == 0)
 			{
 				pObstacleList->push_back(tData);
 			}
 		}
 		CloseHandle(hObjFile);
-		MessageBox(g_hWnd, L"Load File", _T("º∫∞¯"), MB_OK);
+		//MessageBox(g_hWnd, L"Load File", _T("ÏÑ±Í≥µ"), MB_OK);
 	}
 }
 

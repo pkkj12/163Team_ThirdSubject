@@ -1,6 +1,7 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "CCollisionMgr.h"
-
+#include "CBullet_YJ.h"
+#include "CObjYJ.h"
 
 CCollisionMgr* CCollisionMgr::m_pInstance = nullptr;
 CCollisionMgr::CCollisionMgr() {}
@@ -8,19 +9,25 @@ CCollisionMgr::~CCollisionMgr() {}
 
 void CCollisionMgr::CheckCollision_SAT(YJUTIL::OBJ_TYPE  TYPE1, YJUTIL::OBJ_TYPE  TYPE2)
 {
+
 	const auto& ObjList1 = CObjMgr_YJ::GetInstance()->GetObjList(TYPE1);
 	const auto& ObjList2 = CObjMgr_YJ::GetInstance()->GetObjList(TYPE2);
+
+	if (ObjList1.empty() || ObjList2.empty()) return;
 
 	for (auto& Src : ObjList1) {
 		for (auto& Dst : ObjList2) {
 			D3DXVECTOR3 axis;
 			float overlap;
-			//Ãæµ¹ Ã³¸®  ( ÀÓ½Ã )
+			//ì¶©ëŒ ì²˜ë¦¬  ( ì„ì‹œ )
 			//D3DXVECTOR3 vAxis = { 0, 0, 0 };
 			//float fMinOverlapped = static_cast<float>(INF);
 			//if (IsCollide_SAT(Src, Dst, &vAxis, &fMinOverlapped)) {
 			if (IsCollide_SAT(Src, Dst, &axis, &overlap)) {
-				ResolveCollision(Src, Dst, axis, overlap);
+
+				if((Src->GetType() == OBJ_OBSTACLE || Dst->GetType() == OBJ_OBSTACLE)
+					&& Dst->GetType() != OBJ_MBULLET)
+					ResolveCollision(Src, Dst, axis, overlap);
 				//for (auto& v : Src->GetVecWorldVertexs()) {
 				//	cout << " Src : " << v.x << " " << v.y << endl;
 				//}
@@ -30,81 +37,179 @@ void CCollisionMgr::CheckCollision_SAT(YJUTIL::OBJ_TYPE  TYPE1, YJUTIL::OBJ_TYPE
 
 				Src->SetCollide(true);
 				Dst->SetCollide(true);
-			}
-			else {
-				Src->SetCollide(false);
-				Dst->SetCollide(false);
-
+				Src->SetCollide(Dst);
+				Dst->SetCollide(Src);
 			}
 		}
 	}
 }
 
 //bool CCollisionMgr::IsCollide_SAT(const CObj* Obj1, const CObj* Obj2, D3DXVECTOR3* vAxis, float* fMinOverlapped)
-bool CCollisionMgr::IsCollide_SAT(const CObjYJ * Obj1, const CObjYJ* Obj2, D3DXVECTOR3* pOutAxis,
+bool CCollisionMgr::IsCollide_SAT(CObjYJ * Obj1,CObjYJ* Obj2, D3DXVECTOR3* pOutAxis,
 	float* pOutOverlap)
 {
-	// MTV¿¡ ÇÊ¿äÇÑ º¯¼ö
+	// MTVì— í•„ìš”í•œ ë³€ìˆ˜
 	float minOverlap = FLT_MAX;
 	D3DXVECTOR3 smallestAxis;
 
-	//Obj1 + Obj2 ÀÇ ¸ğ¼­¸®¸¦ ´Ù ±¸ÇØ¼­ 
-	// °¢ ¸ğ¼­¸®ÀÇ ¹ı¼± º¤ÅÍ ±¸ÇÏ°í ÀÌ°É ÃàÀ¸·Î »ï¾Æ
-	// °¢ Á¡µéÀ» ÀÌ Ãà¿¡ Åõ¿µÇÑ´Ù. 
-	// ¹üÀ§°¡ °ãÄ¡¸é ´Ù¸¥ ¸ğ¼­¸®¿¡ ´ëÇØ¼­ ¼öÇà
-	// °ãÄ¡Áö ¾ÊÀ¸¸é Ãæµ¹ X
+	//Obj1 + Obj2 ì˜ ëª¨ì„œë¦¬ë¥¼ ë‹¤ êµ¬í•´ì„œ 
+	// ê° ëª¨ì„œë¦¬ì˜ ë²•ì„  ë²¡í„° êµ¬í•˜ê³  ì´ê±¸ ì¶•ìœ¼ë¡œ ì‚¼ì•„
+	// ê° ì ë“¤ì„ ì´ ì¶•ì— íˆ¬ì˜í•œë‹¤. 
+	// ë²”ìœ„ê°€ ê²¹ì¹˜ë©´ ë‹¤ë¥¸ ëª¨ì„œë¦¬ì— ëŒ€í•´ì„œ ìˆ˜í–‰
+	// ê²¹ì¹˜ì§€ ì•Šìœ¼ë©´ ì¶©ëŒ X
+	if (Obj2->GetType() != OBJ_MBULLET)
+	{
+		const auto& vecVertexs1 = Obj1->GetVecWorldVertexs();
+		const auto& vecVertexs2 = Obj2->GetVecWorldVertexs();
 
-	const auto& vecVertexs1 = Obj1->GetVecWorldVertexs();
-	const auto& vecVertexs2 = Obj2->GetVecWorldVertexs();
+		vector<D3DXVECTOR3> edges;
+		edges.reserve(vecVertexs1.size() + vecVertexs2.size());
 
-	vector<D3DXVECTOR3> edges;
-	edges.reserve(vecVertexs1.size() + vecVertexs2.size());
+		//CObj1ì˜ ëª¨ì„œë¦¬
+		for (size_t i = 0; i < vecVertexs1.size(); ++i) {
 
-	//CObj1ÀÇ ¸ğ¼­¸®
-	for (size_t i = 0; i < vecVertexs1.size(); ++i) {
+			//edges.push_back(*vecVertexs1[i] - *vecVertexs1[(i + 1) % vecVertexs1.size()]);
+			edges.push_back(
+				*vecVertexs1[(i + 1) % vecVertexs1.size()] - *vecVertexs1[i]);
+		}
+		//CObj2ì˜ ëª¨ì„œë¦¬
+		for (size_t i = 0; i < vecVertexs2.size(); ++i) {
 
-		//edges.push_back(*vecVertexs1[i] - *vecVertexs1[(i + 1) % vecVertexs1.size()]);
-		edges.push_back(
-			*vecVertexs1[(i + 1) % vecVertexs1.size()] - *vecVertexs1[i]);
+			//edges.push_back(*vecVertexs2[i] - *vecVertexs2[(i + 1) % vecVertexs2.size()]);
+			edges.push_back(
+				*vecVertexs2[(i + 1) % vecVertexs2.size()] - *vecVertexs2[i]);
+		}
+
+		// ëª¨ì„œë¦¬ => ë²•ì„  ë²¡í„° ( ì¶• ) 
+		for (const auto& e : edges) {
+
+			// edgeì˜ ê¸¸ì´ê°€ 0ì´ì—ˆì„ê²½ìš° normalizeì˜ ê°’ì´ nanì´ ë˜ëŠ” ê²½ìš°ê°€ ìˆê¸° ë•Œë¬¸ì—
+			// ë°©ì§€í• ë ¤ëŠ” ì°¨ì›ì—ì„œ êµ¬í˜„í•œ ë°©ì–´ ì½”ë“œ ì¤‘ìš”!!!
+			{
+				float lenSq = e.x * e.x + e.y * e.y;
+				if (lenSq < 0.00001f)
+					continue;
+			}
+
+			D3DXVECTOR3 vAxis;
+			vAxis = { -e.y , e.x, 0.f };
+			D3DXVec3Normalize(&vAxis, &vAxis);
+			float fOutMin1, fOutMax1;
+			float fOutMin2, fOutMax2;
+			Project(Obj1, vAxis, fOutMin1, fOutMax1);
+			Project(Obj2, vAxis, fOutMin2, fOutMax2);
+
+			if (fOutMax1 < fOutMin2 || fOutMax2 < fOutMin1)
+				return false;
+			float overlap = min(fOutMax1, fOutMax2) - max(fOutMin1, fOutMin2);
+			if (overlap < minOverlap)
+			{
+				minOverlap = overlap;
+				smallestAxis = vAxis;
+			}
+		}
+
 	}
-	//CObj2ÀÇ ¸ğ¼­¸®
-	for (size_t i = 0; i < vecVertexs2.size(); ++i) {
+	else
+	{
+		const auto& v1 = Obj1->GetVecWorldVertexs();
 
-		//edges.push_back(*vecVertexs2[i] - *vecVertexs2[(i + 1) % vecVertexs2.size()]);
-		edges.push_back(
-			*vecVertexs2[(i + 1) % vecVertexs2.size()] - *vecVertexs2[i]);
-	}
+		if (v1.size() < 2)
+			return false;
 
-	// ¸ğ¼­¸® => ¹ı¼± º¤ÅÍ ( Ãà ) 
-	for (const auto& e : edges) {
+		D3DXVECTOR3 circleCenter = Obj2->GetPos();
+		float radius = 0.f; // â­ ê³µí†µ ì¸í„°í˜ì´ìŠ¤ ê¶Œì¥
+		if (Obj2->GetType() == OBJ_MBULLET)
+			radius = static_cast<CBullet_YJ*>(Obj2)->GetRadius() * 0.5f;
+		float minOverlap = FLT_MAX;
+		D3DXVECTOR3 smallestAxis;
 
-		// edgeÀÇ ±æÀÌ°¡ 0ÀÌ¾úÀ»°æ¿ì normalizeÀÇ °ªÀÌ nanÀÌ µÇ´Â °æ¿ì°¡ ÀÖ±â ¶§¹®¿¡
-		// ¹æÁöÇÒ·Á´Â Â÷¿ø¿¡¼­ ±¸ÇöÇÑ ¹æ¾î ÄÚµå Áß¿ä!!!
+		//-------------------------------------
+		// 1ï¸âƒ£ OBB Edge Normal Axis
+		//-------------------------------------
+		for (size_t i = 0; i < v1.size(); ++i)
 		{
-			float lenSq = e.x * e.x + e.y * e.y;
+			// edge ìƒì„± (vector ì•ˆì”€)
+			D3DXVECTOR3 edge =
+				*v1[(i + 1) % v1.size()] - *v1[i];
+
+			float lenSq = edge.x * edge.x + edge.y * edge.y;
 			if (lenSq < 0.00001f)
 				continue;
+
+			// ë²•ì„  ì¶•
+			D3DXVECTOR3 axis = { -edge.y, edge.x, 0.f };
+			D3DXVec3Normalize(&axis, &axis);
+
+			float min1, max1;
+			Project(Obj1, axis, min1, max1);
+
+			float centerProj = D3DXVec3Dot(&circleCenter, &axis);
+
+			float min2 = centerProj - radius;
+			float max2 = centerProj + radius;
+
+			// ë¶„ë¦¬ì¶• ë°œê²¬ â†’ ì¶©ëŒ ì—†ìŒ
+			if (max1 < min2 || max2 < min1)
+				return false;
+
+			float overlap = min(max1, max2) - max(min1, min2);
+
+			if (overlap < minOverlap)
+			{
+				minOverlap = overlap;
+				smallestAxis = axis;
+			}
 		}
 
-		D3DXVECTOR3 vAxis;
-		vAxis = { -e.y , e.x, 0.f };
-		D3DXVec3Normalize(&vAxis, &vAxis);
-		float fOutMin1, fOutMax1;
-		float fOutMin2, fOutMax2;
-		Project(Obj1, vAxis, fOutMin1, fOutMax1);
-		Project(Obj2, vAxis, fOutMin2, fOutMax2);
+		//-------------------------------------
+		// â­ 2ï¸âƒ£ ì¶”ê°€ ì¶• (VERY IMPORTANT)
+		// Circle Center â†’ OBB Closest Point
+		//-------------------------------------
 
-		if (fOutMax1 < fOutMin2 || fOutMax2 < fOutMin1)
-			return false;
-		float overlap = min(fOutMax1, fOutMax2) - max(fOutMin1, fOutMin2);
-		if (overlap < minOverlap)
+		D3DXVECTOR3 closestPoint = *v1[0];
+		float minDistSq = FLT_MAX;
+
+		for (auto v : v1)
 		{
-			minOverlap = overlap;
-			smallestAxis = vAxis;
+			D3DXVECTOR3 diff = circleCenter - *v;
+			float distSq = D3DXVec3LengthSq(&diff);
+
+			if (distSq < minDistSq)
+			{
+				minDistSq = distSq;
+				closestPoint = *v;
+			}
+		}
+
+		D3DXVECTOR3 axis = circleCenter - closestPoint;
+
+		if (D3DXVec3LengthSq(&axis) > 0.00001f)
+		{
+			D3DXVec3Normalize(&axis, &axis);
+
+			float min1, max1;
+			Project(Obj1, axis, min1, max1);
+
+			float centerProj = D3DXVec3Dot(&circleCenter, &axis);
+			float min2 = centerProj - radius;
+			float max2 = centerProj + radius;
+
+			if (max1 < min2 || max2 < min1)
+				return false;
+
+			float overlap = min(max1, max2) - max(min1, min2);
+
+			if (overlap < minOverlap)
+			{
+				minOverlap = overlap;
+				smallestAxis = axis;
+			}
 		}
 	}
 
-	//MFV Ãß°¡ÇØº¸±â
+	
+	//MFV ì¶”ê°€í•´ë³´ê¸°
 	*pOutAxis = smallestAxis;
 	*pOutOverlap = minOverlap;
 	return true;
@@ -122,7 +227,5 @@ void CCollisionMgr::Project(const CObjYJ* Obj, const D3DXVECTOR3 vAxis, float& f
 		float fDot = D3DXVec3Dot(vecVertexs[i], &vAxis);
 		fOutMin = min(fOutMin, fDot);
 		fOutMax = max(fOutMax, fDot);
-
-
 	}
 }

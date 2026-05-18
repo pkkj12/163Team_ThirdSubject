@@ -114,6 +114,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>../Header;../Include;../../Base;../../Reference/Header;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -139,13 +140,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Header\CBoss_YJ.h" />
+    <ClInclude Include="..\Header\CBullet_YJ.h" />
     <ClInclude Include="..\Header\CCollisionMgr.h" />
     <ClInclude Include="..\Header\CLineMgr_YJ.h" />
     <ClInclude Include="..\Header\CLine_YJ.h" />
     <ClInclude Include="..\Header\CMainApp.h" />
+    <ClInclude Include="..\Header\CMonster_YJ.h" />
     <ClInclude Include="..\Header\CObjMgr_YJ.h" />
     <ClInclude Include="..\Header\CObjYJ.h" />
     <ClInclude Include="..\Header\CObstacle.h" />
+    <ClInclude Include="..\Header\CPinWheel_YJ.h" />
     <ClInclude Include="..\Header\CPlayer_YJ.h" />
     <ClInclude Include="..\Header\CScene_YJ.h" />
     <ClInclude Include="..\Header\CScrollMgr_YJ.h" />
@@ -160,13 +165,17 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\CBoss_YJ.cpp" />
+    <ClCompile Include="..\Code\CBullet_YJ.cpp" />
     <ClCompile Include="..\Code\CCollisionMgr.cpp" />
     <ClCompile Include="..\Code\CLineMgr_YJ.cpp" />
     <ClCompile Include="..\Code\CLine_YJ.cpp" />
     <ClCompile Include="..\Code\CMainApp.cpp" />
+    <ClCompile Include="..\Code\CMonster_YJ.cpp" />
     <ClCompile Include="..\Code\CObjMgr_YJ.cpp" />
     <ClCompile Include="..\Code\CObjYJ.cpp" />
     <ClCompile Include="..\Code\CObstacle.cpp" />
+    <ClCompile Include="..\Code\CPinWheel_YJ.cpp" />
     <ClCompile Include="..\Code\CPlayer_YJ.cpp" />
     <ClCompile Include="..\Code\CScene_YJ.cpp" />
     <ClCompile Include="..\Code\CScrollMgr_YJ.cpp" />
