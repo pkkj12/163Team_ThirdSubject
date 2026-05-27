@@ -4,9 +4,9 @@
 
 enum SceneType_
 {
-	SM,
-	JW,
 	YJ,
+	JW,
+	SM,
 	YB,
 
 	SCENE_END
@@ -29,9 +29,11 @@ public:
 	void Release();
 
 public:
-	void ChangeScene(SceneType_ eSceneType);
+	void ChangeScene(SceneType_ eSceneType = SceneType_::SCENE_END);
 
 private:
-	CScene* m_pCurScene = nullptr;
-};
+	void KeyInput();
 
+private:
+	pair<SceneType_, CScene*> m_pCurScene = { SceneType_::SCENE_END, nullptr };
+};

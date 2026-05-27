@@ -14,6 +14,7 @@ CVampSurvival::CVampSurvival() : m_pPlayer(nullptr), m_fTime(0.f), m_bIsEnd(0.f)
 
 CVampSurvival::~CVampSurvival()
 {
+	Release();
 }
 
 void CVampSurvival::Initialize()
@@ -86,6 +87,8 @@ void CVampSurvival::LateUpdate()
 {
 	GET_SINGLE(CObjMgr_YJ)->LateUpdate();
 	//GET_SINGLE(CScrollMgr_YJ)->Scroll_Lock(1920.f, 600.f);
+
+	Key_Input();
 }
 
 void CVampSurvival::Render(HDC hMemDC)
@@ -103,6 +106,7 @@ void CVampSurvival::Render(HDC hMemDC)
 			titleFont = CreateFont(80, 0, 0, 0, 0, 0, 0, 0, HANGEUL_CHARSET, 0, 0, 0, VARIABLE_PITCH, TEXT("Arial"));
 			oldFont = (HFONT)SelectObject(hMemDC, titleFont);
 			DrawText(hMemDC, L"게임 오버!", -1, &m_rectEnd, DT_CENTER | DT_SINGLELINE | DT_VCENTER);
+
 		}
 		else
 		{
@@ -116,13 +120,26 @@ void CVampSurvival::Render(HDC hMemDC)
 	
 
 	GET_SINGLE(CObjMgr_YJ)->Render(hMemDC);
+
 }
 
 void CVampSurvival::Release()
 {
+	CObjMgr_YJ::Destroy_Instance();
 }
 
 bool CVampSurvival::IsEndGame()
 {
 	return static_cast<CPlayer_YJ*>(m_pPlayer)->IsDead() || m_fTime > 30.f;
+}
+
+#include "CSceneMgr_.h"
+
+void CVampSurvival::Key_Input()
+{
+	if (IsEndGame() &&
+		GetAsyncKeyState(VK_SPACE))
+	{
+		CSceneMgr_::GetInstance()->ChangeScene(SceneType_::JW);
+	}
 }

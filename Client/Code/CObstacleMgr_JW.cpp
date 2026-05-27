@@ -17,7 +17,7 @@ CObstacleMgr_JW::~CObstacleMgr_JW()
 {
 	while (!m_queueObstacle.empty())
 	{
-		Safe_Delete<CObj_JW*>(m_queueObstacle.front());
+		Engine::Safe_Delete<CObj_JW*>(m_queueObstacle.front());
 		m_queueObstacle.pop();
 	}
 }

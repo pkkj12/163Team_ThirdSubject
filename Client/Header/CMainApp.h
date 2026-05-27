@@ -3,6 +3,7 @@
 #include "../../Base/CBase.h"
 #include "Engine_Define.h"
 #include "CGraphicDev.h"
+#include "CSceneMgr_.h"
 
 class CObj;
 
@@ -18,13 +19,6 @@ public:
 	int				Update_MainApp(const _float& fTimeDelta);
 	void			LateUpdate_MainApp(const _float& fTimeDelta);
 	void			Render_MainApp();
-
-private:
-	HDC        m_hDC = NULL;
-	HDC        m_hBackDC = NULL;
-	HBITMAP		m_hBMP = NULL;
-	HBITMAP		m_hOldBMP = NULL;
-
 
 public:
 	static CMainApp* Create();		// 생성 함수

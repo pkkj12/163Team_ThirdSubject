@@ -98,5 +98,5 @@ void CSpace_JW::Render(HDC hDC)
 
 	TextOut(hDC, WINCX - 90 - 18, WINCY - 18, wsTimeText.c_str(), wsTimeText.size());
 
-	DEBUG_JW::DBG_WindowText(m_tWorldInfo.vRotate);
+//	DEBUG_JW::DBG_WindowText(m_tWorldInfo.vRotate);
 }

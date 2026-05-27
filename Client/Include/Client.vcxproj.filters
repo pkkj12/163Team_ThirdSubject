@@ -28,9 +28,6 @@
     <Filter Include="02. Scene">
       <UniqueIdentifier>{a4aca2fb-8ffe-43af-9cbf-63412e319b7e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Scene\VampSurv">
-      <UniqueIdentifier>{9b765564-9568-4da7-bac7-87b0be1d9508}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. Obj\01. Shield">
       <UniqueIdentifier>{dd162225-519e-43dd-b361-39b0b0ffe0c0}</UniqueIdentifier>
     </Filter>
@@ -73,6 +70,27 @@
     <Filter Include="01. Obj\05. Weapon">
       <UniqueIdentifier>{015b8d98-5a65-42f3-8809-08264b8de70b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Scene\01. YJ">
+      <UniqueIdentifier>{c1276e28-54d4-48a8-b8b1-daa443b49771}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\01. YJ\VampSurv">
+      <UniqueIdentifier>{9b765564-9568-4da7-bac7-87b0be1d9508}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\02, JW">
+      <UniqueIdentifier>{373dd5c9-6d85-4a68-b4d8-45bc67b3a06e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\02, JW\Header">
+      <UniqueIdentifier>{6abb17ba-66ec-4c47-b1e4-f6f6d1d28f1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\02, JW\Code">
+      <UniqueIdentifier>{4b82cd3f-18ed-4c75-a2d1-fc8028b8a43f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\02, JW\Manager">
+      <UniqueIdentifier>{fe3bc35a-def6-44e5-8dad-a498184053eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. DesignPattern\05. SceneManager">
+      <UniqueIdentifier>{d8ce6f2b-2745-4b99-8bec-d67f4c9c9313}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -102,11 +120,8 @@
     <ClInclude Include="Define_YJ.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CScene_YJ.h">
-      <Filter>02. Scene</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\CVampSurvival.h">
-      <Filter>02. Scene\VampSurv</Filter>
+      <Filter>02. Scene\01. YJ\VampSurv</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\CShield_YJ.h">
       <Filter>01. Obj\01. Shield</Filter>
@@ -144,6 +159,42 @@
     <ClInclude Include="..\Header\CPinWheel_YJ.h">
       <Filter>01. Obj\04. Bullet\PinWheel</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\CScene_YJ.h">
+      <Filter>02. Scene\01. YJ</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CSpace_JW.h">
+      <Filter>02. Scene\02, JW\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CHexagon_JW.h">
+      <Filter>02. Scene\02, JW\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CObj_JW.h">
+      <Filter>02. Scene\02, JW\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CObstacle_JW.h">
+      <Filter>02. Scene\02, JW\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CPlayer_JW.h">
+      <Filter>02. Scene\02, JW\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CScene_JW.h">
+      <Filter>02. Scene\02, JW\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CCollisionMgr_JW.h">
+      <Filter>02. Scene\02, JW\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Define_JW.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CSceneMgr_.h">
+      <Filter>03. DesignPattern\05. SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CObstacleMgr_JW.h">
+      <Filter>02. Scene\02, JW\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CObjMgr_JW.h">
+      <Filter>02. Scene\02, JW\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -161,11 +212,8 @@
     <ClCompile Include="..\Code\CPlayer_YJ.cpp">
       <Filter>01. Obj\00. Player\YJ</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CScene_YJ.cpp">
-      <Filter>02. Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\CVampSurvival.cpp">
-      <Filter>02. Scene\VampSurv</Filter>
+      <Filter>02. Scene\01. YJ\VampSurv</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\CShield_YJ.cpp">
       <Filter>01. Obj\01. Shield</Filter>
@@ -202,6 +250,39 @@
     </ClCompile>
     <ClCompile Include="..\Code\CPinWheel_YJ.cpp">
       <Filter>01. Obj\04. Bullet\PinWheel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CScene_YJ.cpp">
+      <Filter>02. Scene\01. YJ</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CSpace_JW.cpp">
+      <Filter>02. Scene\02, JW\Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CScene_JW.cpp">
+      <Filter>02. Scene\02, JW\Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CPlayer_JW.cpp">
+      <Filter>02. Scene\02, JW\Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CObstacle_JW.cpp">
+      <Filter>02. Scene\02, JW\Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CObj_JW.cpp">
+      <Filter>02. Scene\02, JW\Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CHexagon_JW.cpp">
+      <Filter>02. Scene\02, JW\Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CCollisionMgr_JW.cpp">
+      <Filter>02. Scene\02, JW\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CSceneMgr_.cpp">
+      <Filter>03. DesignPattern\05. SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CObstacleMgr_JW.cpp">
+      <Filter>02. Scene\02, JW\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CObjMgr_JW.cpp">
+      <Filter>02. Scene\02, JW\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

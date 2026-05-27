@@ -266,5 +266,5 @@ void CHexagon_JW::Free()
 
 	// 부모를 나중에? 근데 이렇게 하는게 맞나 싶긴 하네
 	// Safe_Release<CObj_JW*>(m_pParent);
-	Safe_Delete<CObj_JW*>(m_pParent);
+	Engine::Safe_Delete<CObj_JW*>(m_pParent);
 }

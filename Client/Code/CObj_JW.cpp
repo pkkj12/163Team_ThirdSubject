@@ -25,13 +25,13 @@ void CObj_JW::Free()
 {
 	for_each(m_vecLocalVertex.begin(), m_vecLocalVertex.end(), [](auto pV)
 		{
-			Safe_Delete<_vec3*>(pV);
+			Engine::Safe_Delete<_vec3*>(pV);
 		});
 	m_vecLocalVertex.clear();
 
 	for_each(m_vecWorldVertex.begin(), m_vecWorldVertex.end(), [](auto pV)
 		{
-			Safe_Delete<_vec3*>(pV);
+			Engine::Safe_Delete<_vec3*>(pV);
 		});
 	m_vecWorldVertex.clear();
 }

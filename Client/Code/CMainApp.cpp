@@ -1,6 +1,10 @@
 #include "pch.h"
 #include "CMainApp.h"
 
+CMainApp::CMainApp()
+{
+}
+
 CMainApp::~CMainApp()
 {
 	CSceneMgr_::DestroyInstance();
@@ -9,26 +13,6 @@ CMainApp::~CMainApp()
 HRESULT CMainApp::Ready_MainApp()
 {
 	srand(time(NULL));
-
-// <<<<<<< HEAD
-	m_pDeviceClass->AddRef();
-	m_pGraphicDev = m_pDeviceClass->Get_GraphicDev();
-	m_pGraphicDev->AddRef();
-
-	//if (FAILED(CGraphicDev::GetInstance()->Ready_GraphicDev(g_hWnd,
-	//	MODE_WIN, WINCX, WINCY, &m_pDeviceClass)))
-	//	return E_FAIL;
-
-	//m_pDeviceClass->AddRef();
-	//m_pGraphicDev = m_pDeviceClass->Get_GraphicDev();
-	//m_pGraphicDev->AddRef();
-// >>>>>>> Park
-
-	//if (!m_pSceneYJ)
-	//{
-	//	m_pSceneYJ = new CVampSurvival;
-	//	m_pSceneYJ->Initialize();
-	//}
 
 	m_hDC = GetDC(g_hWnd);
 	m_hBackDC = CreateCompatibleDC(m_hDC);
@@ -84,7 +68,4 @@ void CMainApp::Free()
 	DeleteDC(m_hBackDC);
 
 	CSceneMgr_::DestroyInstance();
-
-	Safe_Release(m_pDeviceClass);
-	Safe_Release(m_pGraphicDev);
 }

@@ -76,7 +76,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
     }
 
-    Safe_Delete(pMainApp);
+    Engine::Safe_Delete(pMainApp);
 
     //_ulong dwRefCnt = 0;
 
@@ -178,6 +178,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
+    case WM_KEYDOWN:
+        switch (wParam)
+        {
+        case VK_ESCAPE:
+            PostQuitMessage(0);
+            break;
+        }
     case WM_PAINT:
         {
             PAINTSTRUCT ps;

@@ -51,7 +51,9 @@ void CScene_JW::Render(HDC hDC)
 {
 	CObjMgr_JW::GetInstance()->Render(hDC);
 
-
+	HFONT titleFont, oldFont;
+	titleFont = CreateFont(16, 0, 0, 0, 0, 0, 0, 0, HANGEUL_CHARSET, 0, 0, 0, VARIABLE_PITCH, TEXT("Arial"));
+	oldFont = (HFONT)SelectObject(hDC, titleFont);
 }
 
 void CScene_JW::Release()
