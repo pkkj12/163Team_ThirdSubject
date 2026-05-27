@@ -9,19 +9,15 @@
 
 // 여기에 미리 컴파일하려는 헤더 추가
 #include "framework.h"
-#include <d3d9.h>
-#include <d3dx9.h>
+
+
+#include "d3d9.h"
+#include "d3dx9.h"
 
 #include <list>
 #include <vector>
-#include <map>
 #include <algorithm>
-#include <iostream>
-#include <format>
-#include <string>
-
-extern HWND g_hWnd;
-
+#include <map>
 
 #ifdef _DEBUG
 
@@ -35,9 +31,10 @@ extern HWND g_hWnd;
 
 #endif
 #endif
+
+
 using namespace std;
 
-// 연재 Define, 유틸 네임스페이스 추가
-#include "Define_YJ.h"
-using namespace YJUTIL;
+extern HWND g_hEditorWnd;
+#include "Define.h"
 #endif //PCH_H

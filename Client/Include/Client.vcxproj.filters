@@ -9,51 +9,69 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="00. MainApp">
-      <UniqueIdentifier>{05915325-66cb-4221-9a3b-92059767cec3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="_JW">
-      <UniqueIdentifier>{70e4897c-f794-4f02-a3f7-ad501fcd6b17}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="_JW\Obj_JW">
-      <UniqueIdentifier>{d70c626d-3635-4ef4-a0e3-9c85f20fb2eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="_JW\Obj_JW\Hexagon">
-      <UniqueIdentifier>{f59b68bc-9242-4cbd-bc82-afac9c284503}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="_JW\Obj_JW\Player">
-      <UniqueIdentifier>{eda1a3fd-ec8d-417d-aa3f-a08aa08e339e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="_JW\Obj_JW\Obstacle">
-      <UniqueIdentifier>{f11eb5c1-0c99-4757-847f-6bb6dc619591}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="_JW\Scene">
-      <UniqueIdentifier>{452cebb4-ab8c-47b9-9af9-287f73d0f4f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="_JW\Manager">
-      <UniqueIdentifier>{8f2fff1b-1ede-4052-9729-32b817ed74e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="_JW\Manager\CollisionManager">
-      <UniqueIdentifier>{c4eebecd-4fc6-4192-9f08-122599b5d93b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="_JW\Manager\ObjectManager">
-      <UniqueIdentifier>{3da8c0b4-2885-4454-9b27-d425a76243c5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="리소스 파일">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="_JW\ObstacleSpawner">
-      <UniqueIdentifier>{a7ab94c1-a371-45e4-ad7f-f563c54ce5ba}</UniqueIdentifier>
+    <Filter Include="00. MainApp">
+      <UniqueIdentifier>{05915325-66cb-4221-9a3b-92059767cec3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_JW\Obj_JW\Space">
-      <UniqueIdentifier>{600cab80-343a-4567-9d80-bd0faa1de68d}</UniqueIdentifier>
+    <Filter Include="01. Obj">
+      <UniqueIdentifier>{51c75cd8-754f-47eb-84ae-384c321e8602}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_JW\Scene\Scene_JW">
-      <UniqueIdentifier>{c394fa96-b7c0-477c-a54c-0b7b4a535e6c}</UniqueIdentifier>
+    <Filter Include="01. Obj\00. Player">
+      <UniqueIdentifier>{b8cdd779-7371-47b7-ba36-00a76eaa987f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_JW\Manager\SceneManager">
-      <UniqueIdentifier>{abb28ea3-ed9c-4337-9a9f-f9387f214ead}</UniqueIdentifier>
+    <Filter Include="01. Obj\00. Player\YJ">
+      <UniqueIdentifier>{81038334-338a-4eee-964f-a695194fa63d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene">
+      <UniqueIdentifier>{a4aca2fb-8ffe-43af-9cbf-63412e319b7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\VampSurv">
+      <UniqueIdentifier>{9b765564-9568-4da7-bac7-87b0be1d9508}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\01. Shield">
+      <UniqueIdentifier>{dd162225-519e-43dd-b361-39b0b0ffe0c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. DesignPattern">
+      <UniqueIdentifier>{bfd23158-bed5-4b61-b727-33eec77f4a00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. DesignPattern\00. TimeManager">
+      <UniqueIdentifier>{c963e8ad-7395-459c-ac05-62196e210c83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\02. Monster">
+      <UniqueIdentifier>{ce8ab83f-2c61-4e18-835c-c9f5c970a12d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\03. Obstacle">
+      <UniqueIdentifier>{d79e6c86-5348-4e28-94f5-9fca74d3b8ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. DesignPattern\01. CollisionManager">
+      <UniqueIdentifier>{8e0fb392-afc3-43e1-82e5-16fdfe6855e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. DesignPattern\02. ObjectManager">
+      <UniqueIdentifier>{bcec7e00-c437-41b1-9691-e208ba52055f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. DesignPattern\03. LineManager">
+      <UniqueIdentifier>{ded01432-819e-4ae7-93dc-b166052ef60f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. DesignPattern\03. LineManager\Line">
+      <UniqueIdentifier>{9b530f1a-81b7-4f05-9fe6-deb1a9d3836c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. DesignPattern\04. ScrollManager">
+      <UniqueIdentifier>{c1360d02-169b-46fe-be6e-1924eae2d8b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\02. Monster\00. Boss">
+      <UniqueIdentifier>{79160eeb-7cc2-4fee-94f7-ed5782a3fd01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\04. Bullet">
+      <UniqueIdentifier>{670dd859-7273-40e3-8c80-5afd7156d47b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\04. Bullet\PinWheel">
+      <UniqueIdentifier>{3b90cd34-8b30-407e-bc79-34a588fb41a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\05. Weapon">
+      <UniqueIdentifier>{015b8d98-5a65-42f3-8809-08264b8de70b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,41 +93,56 @@
     <ClInclude Include="..\Header\CMainApp.h">
       <Filter>00. MainApp</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CObj_JW.h">
-      <Filter>_JW\Obj_JW</Filter>
+    <ClInclude Include="..\Header\CObjYJ.h">
+      <Filter>01. Obj</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CHexagon_JW.h">
-      <Filter>_JW\Obj_JW\Hexagon</Filter>
+    <ClInclude Include="..\Header\CPlayer_YJ.h">
+      <Filter>01. Obj\00. Player\YJ</Filter>
     </ClInclude>
-    <ClInclude Include="Define_JW.h">
-      <Filter>_JW</Filter>
+    <ClInclude Include="Define_YJ.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CObjMgr_JW.h">
-      <Filter>_JW\Manager\ObjectManager</Filter>
+    <ClInclude Include="..\Header\CScene_YJ.h">
+      <Filter>02. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CSpace_JW.h">
-      <Filter>_JW\Obj_JW\Space</Filter>
+    <ClInclude Include="..\Header\CVampSurvival.h">
+      <Filter>02. Scene\VampSurv</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CScene.h">
-      <Filter>_JW\Scene</Filter>
+    <ClInclude Include="..\Header\CShield_YJ.h">
+      <Filter>01. Obj\01. Shield</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CScene_JW.h">
-      <Filter>_JW\Scene\Scene_JW</Filter>
+    <ClInclude Include="..\Header\CTimeMgr_YJ.h">
+      <Filter>03. DesignPattern\00. TimeManager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CObstacle_JW.h">
-      <Filter>_JW\Obj_JW\Obstacle</Filter>
+    <ClInclude Include="..\Header\CObstacle.h">
+      <Filter>01. Obj\03. Obstacle</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CPlayer_JW.h">
-      <Filter>_JW\Obj_JW\Player</Filter>
+    <ClInclude Include="..\Header\CCollisionMgr.h">
+      <Filter>03. DesignPattern\01. CollisionManager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CSceneMgr_.h">
-      <Filter>_JW\Manager\SceneManager</Filter>
+    <ClInclude Include="..\Header\CObjMgr_YJ.h">
+      <Filter>03. DesignPattern\02. ObjectManager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CCollisionMgr_JW.h">
-      <Filter>_JW\Manager\CollisionManager</Filter>
+    <ClInclude Include="..\Header\CLine_YJ.h">
+      <Filter>03. DesignPattern\03. LineManager\Line</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\CObstacleMgr_JW.h">
-      <Filter>_JW\ObstacleSpawner</Filter>
+    <ClInclude Include="..\Header\CLineMgr_YJ.h">
+      <Filter>03. DesignPattern\03. LineManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CScrollMgr_YJ.h">
+      <Filter>03. DesignPattern\04. ScrollManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CBoss_YJ.h">
+      <Filter>01. Obj\02. Monster\00. Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CMonster_YJ.h">
+      <Filter>01. Obj\02. Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CBullet_YJ.h">
+      <Filter>01. Obj\04. Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CPinWheel_YJ.h">
+      <Filter>01. Obj\04. Bullet\PinWheel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -122,38 +155,53 @@
     <ClCompile Include="..\Code\CMainApp.cpp">
       <Filter>00. MainApp</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CObj_JW.cpp">
-      <Filter>_JW\Obj_JW</Filter>
+    <ClCompile Include="..\Code\CObjYJ.cpp">
+      <Filter>01. Obj</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CHexagon_JW.cpp">
-      <Filter>_JW\Obj_JW\Hexagon</Filter>
+    <ClCompile Include="..\Code\CPlayer_YJ.cpp">
+      <Filter>01. Obj\00. Player\YJ</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CObjMgr_JW.cpp">
-      <Filter>_JW\Manager\ObjectManager</Filter>
+    <ClCompile Include="..\Code\CScene_YJ.cpp">
+      <Filter>02. Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CObstacleMgr_JW.cpp">
-      <Filter>_JW\ObstacleSpawner</Filter>
+    <ClCompile Include="..\Code\CVampSurvival.cpp">
+      <Filter>02. Scene\VampSurv</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CSpace_JW.cpp">
-      <Filter>_JW\Obj_JW\Space</Filter>
+    <ClCompile Include="..\Code\CShield_YJ.cpp">
+      <Filter>01. Obj\01. Shield</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CScene.cpp">
-      <Filter>_JW\Scene</Filter>
+    <ClCompile Include="..\Code\CTimeMgr_YJ.cpp">
+      <Filter>03. DesignPattern\00. TimeManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CScene_JW.cpp">
-      <Filter>_JW\Scene\Scene_JW</Filter>
+    <ClCompile Include="..\Code\CObstacle.cpp">
+      <Filter>01. Obj\03. Obstacle</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CObstacle_JW.cpp">
-      <Filter>_JW\Obj_JW\Obstacle</Filter>
+    <ClCompile Include="..\Code\CCollisionMgr.cpp">
+      <Filter>03. DesignPattern\01. CollisionManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CPlayer_JW.cpp">
-      <Filter>_JW\Obj_JW\Player</Filter>
+    <ClCompile Include="..\Code\CObjMgr_YJ.cpp">
+      <Filter>03. DesignPattern\02. ObjectManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CSceneMgr_.cpp">
-      <Filter>_JW\Manager\SceneManager</Filter>
+    <ClCompile Include="..\Code\CLine_YJ.cpp">
+      <Filter>03. DesignPattern\03. LineManager\Line</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CCollisionMgr_JW.cpp">
-      <Filter>_JW\Manager\CollisionManager</Filter>
+    <ClCompile Include="..\Code\CLineMgr_YJ.cpp">
+      <Filter>03. DesignPattern\03. LineManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CScrollMgr_YJ.cpp">
+      <Filter>03. DesignPattern\04. ScrollManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CBoss_YJ.cpp">
+      <Filter>01. Obj\02. Monster\00. Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CMonster_YJ.cpp">
+      <Filter>01. Obj\02. Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CBullet_YJ.cpp">
+      <Filter>01. Obj\04. Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CPinWheel_YJ.cpp">
+      <Filter>01. Obj\04. Bullet\PinWheel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="00. MainEditorApp">
+      <UniqueIdentifier>{4215cdf1-78d6-4006-819e-0d5ea47360fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. LineManager">
+      <UniqueIdentifier>{33e8c855-2485-46eb-bb31-5a1d8f7e4629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. LineManager\Line">
+      <UniqueIdentifier>{08ab3485-5e11-49fa-84f9-125870626c49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. ScrollManager">
+      <UniqueIdentifier>{cb356563-9a51-4b0f-b57b-7a3e2a59a3b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. KeyManager">
+      <UniqueIdentifier>{41bd7e10-a8b7-4ea6-bfcd-5b0651c94b9a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CMainEditorApp.h">
+      <Filter>00. MainEditorApp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CLineMgr.h">
+      <Filter>01. LineManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CLine.h">
+      <Filter>01. LineManager\Line</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CScrollMgr.h">
+      <Filter>02. ScrollManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\CKeyMgr.h">
+      <Filter>03. KeyManager</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Editor.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CMainEditorApp.cpp">
+      <Filter>00. MainEditorApp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CLineMgr.cpp">
+      <Filter>01. LineManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CLine.cpp">
+      <Filter>01. LineManager\Line</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CScrollMgr.cpp">
+      <Filter>02. ScrollManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CKeyMgr.cpp">
+      <Filter>03. KeyManager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Editor.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Editor.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

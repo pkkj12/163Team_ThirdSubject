@@ -4,6 +4,8 @@
 #include "Engine_Define.h"
 #include "CGraphicDev.h"
 
+class CObj;
+
 class CMainApp
 	: public CBase
 {	
@@ -18,8 +20,11 @@ public:
 	void			Render_MainApp();
 
 private:
-	Engine::CGraphicDev* m_pDeviceClass;
-	LPDIRECT3DDEVICE9		m_pGraphicDev;
+	HDC        m_hDC = NULL;
+	HDC        m_hBackDC = NULL;
+	HBITMAP		m_hBMP = NULL;
+	HBITMAP		m_hOldBMP = NULL;
+
 
 public:
 	static CMainApp* Create();		// 생성 함수
